@@ -346,19 +346,99 @@ class IRGenerator:
             temp = self.new_temp()
             self.instructions.append(f"{node.operator.upper()} {left}, {right}, {temp}")
             return temp
+        elif isinstance(node, IfStatement):
+            self.generate_if_statement(node)
+        elif isinstance(node, WhileLoop):
+            self.generate_while_loop(node)
+        elif isinstance(node, ForLoop):
+            self.generate_for_loop(node)
         elif isinstance(node, Literal):
             temp = self.new_temp()
             self.instructions.append(f"LOAD {node.value}, {temp}")
             return temp
         elif isinstance(node, Variable):
             return node.name
+        elif isinstance(node, Array):
+            temp = self.new_temp()
+            for i, elem in enumerate(node.elements):
+                elem_temp = self.generate(elem)
+                self.instructions.append(f"ARRAY_STORE {elem_temp}, {temp}, {i}")
+            return temp
+        elif isinstance(node, ArrayAccess):
+            array_temp = self.generate(node.array)
+            index_temp = self.generate(node.index)
+            temp = self.new_temp()
+            self.instructions.append(f"ARRAY_LOAD {array_temp}, {index_temp}, {temp}")
+            return temp
         else:
             raise Exception(f"Unsupported AST node: {type(node)}")
 
-        return None
+    def generate_if_statement(self, node):
+        cond_temp = self.generate(node.condition)
+        else_label = self.new_label()
+        end_label = self.new_label()
+
+        self.instructions.append(f"IF_FALSE {cond_temp}, GOTO {else_label}")
+
+        # Generate the main body of the if statement
+        for stmt in node.body:
+            self.generate(stmt)
+        self.instructions.append(f"GOTO {end_label}")
+
+        # Handle elif clauses
+        self.instructions.append(f"LABEL {else_label}")
+        for condition, body in node.elif_clauses:
+            elif_cond_temp = self.generate(condition)
+            elif_end_label = self.new_label()
+            self.instructions.append(f"IF_FALSE {elif_cond_temp}, GOTO {elif_end_label}")
+            for stmt in body:
+                self.generate(stmt)
+            self.instructions.append(f"GOTO {end_label}")
+            self.instructions.append(f"LABEL {elif_end_label}")
+
+        # Handle else clause
+        if node.else_clause:
+            self.instructions.append(f"LABEL {else_label}")
+            for stmt in node.else_clause:
+                self.generate(stmt)
+
+        self.instructions.append(f"LABEL {end_label}")
+
+    def generate_while_loop(self, node):
+        start_label = self.new_label()
+        end_label = self.new_label()
+
+        self.instructions.append(f"LABEL {start_label}")
+        cond_temp = self.generate(node.condition)
+        self.instructions.append(f"IF_FALSE {cond_temp}, GOTO {end_label}")
+
+        for stmt in node.body:
+            self.generate(stmt)
+        self.instructions.append(f"GOTO {start_label}")
+        self.instructions.append(f"LABEL {end_label}")
+
+    def generate_for_loop(self, node):
+        start_label = self.new_label()
+        end_label = self.new_label()
+        iterable_temp = self.generate(node.iterable)
+        loop_var = node.variable.name
+        iter_temp = self.new_temp()
+
+        self.instructions.append(f"ITER_INIT {iterable_temp}, {iter_temp}")
+
+        self.instructions.append(f"LABEL {start_label}")
+        self.instructions.append(f"ITER_HASNEXT {iter_temp}, {end_label}")
+        self.instructions.append(f"ITER_NEXT {iter_temp}, {loop_var}")
+
+        for stmt in node.body:
+            self.generate(stmt)
+
+        self.instructions.append(f"GOTO {start_label}")
+        self.instructions.append(f"LABEL {end_label}")
 
     def get_ir(self):
         return "\n".join(self.instructions)
+
 
 # --- GUI IDE ---
 class IDE:

@@ -1,4 +1,3 @@
-
 import tkinter as tk
 from tkinter import scrolledtext
 import ply.lex as lex
@@ -27,6 +26,31 @@ class IfStatement(ASTNode):
                 f"body={self.body}, "
                 f"elif_clauses={self.elif_clauses}, "
                 f"else_clause={self.else_clause})")
+
+class WhileLoop(ASTNode):
+    def __init__(self, condition, body):
+        self.condition = condition
+        self.body = body
+
+    def __repr__(self):
+        return f"WhileLoop(condition={self.condition}, body={self.body})"
+
+class ForLoop(ASTNode):
+    def __init__(self, variable, iterable, body):
+        self.variable = variable
+        self.iterable = iterable
+        self.body = body
+
+    def __repr__(self):
+        return f"ForLoop(variable={self.variable}, iterable={self.iterable}, body={self.body})"
+
+class Assignment(ASTNode):
+    def __init__(self, variable, value):
+        self.variable = variable
+        self.value = value
+
+    def __repr__(self):
+        return f"Assignment(variable={self.variable}, value={self.value})"
 
 class PrintStatement(ASTNode):
     def __init__(self, expression):
@@ -60,72 +84,27 @@ class Variable(ASTNode):
     def __repr__(self):
         return f"Variable(name={self.name})"
 
-# # --- Symbol Table ---
-# class SymbolTable:
-#     def __init__(self):
-#         self.symbols = {}
+class Array(ASTNode):
+    def __init__(self, elements):
+        self.elements = elements
 
-#     def declare(self, name, value=None):
-#         self.symbols[name] = value
+    def __repr__(self):
+        return f"Array(elements={self.elements})"
 
-#     def assign(self, name, value):
-#         self.symbols[name] = value
+class ArrayAccess(ASTNode):
+    def __init__(self, array, index):
+        self.array = array
+        self.index = index
 
-#     def lookup(self, name):
-#         if name not in self.symbols:
-#             raise Exception(f"Variable '{name}' not declared.")
-#         return self.symbols[name]
-
-#     def __repr__(self):
-#         return f"SymbolTable(symbols={self.symbols})"
-
-# # --- Semantic Analyzer ---
-# class SemanticAnalyzer:
-#     def __init__(self, symbol_table, output_callback):
-#         self.symbol_table = symbol_table
-#         self.output_callback = output_callback
-
-#     def analyze(self, node):
-#         if isinstance(node, Program):
-#             for statement in node.statements:
-#                 self.analyze(statement)
-#         elif isinstance(node, PrintStatement):
-#             value = self.evaluate_expression(node.expression)
-#             self.output_callback(f"{value}\n")  # Send output to callback
-#         elif isinstance(node, BinaryOp):
-#             self.analyze(node.left)
-#             self.analyze(node.right)
-#         elif isinstance(node, Variable):
-#             self.symbol_table.lookup(node.name)
-#         elif isinstance(node, Literal):
-#             pass
-#         else:
-#             raise Exception(f"Unknown node type: {type(node)}")
-
-#     def evaluate_expression(self, expr):
-#         if isinstance(expr, Literal):
-#             return expr.value
-#         elif isinstance(expr, Variable):
-#             return self.symbol_table.lookup(expr.name)
-#         elif isinstance(expr, BinaryOp):
-#             left = self.evaluate_expression(expr.left)
-#             right = self.evaluate_expression(expr.right)
-#             if expr.operator == '+':
-#                 return left + right
-#             elif expr.operator == '-':
-#                 return left - right
-#             elif expr.operator == '*':
-#                 return left * right
-#             elif expr.operator == '/':
-#                 return left / right
-#         else:
-#             raise Exception(f"Unknown expression type: {type(expr)}")
+    def __repr__(self):
+        return f"ArrayAccess(array={self.array}, index={self.index})"
 
 # --- Lexer Definition ---
 class Lexer:
     tokens = [
         "TT_identifier",
         "TT_int",
+        "TT_string",
         "TT_plus",
         "TT_sub",
         "TT_mul",
@@ -134,9 +113,21 @@ class Lexer:
         "TT_dequ",
         "TT_less",
         "TT_greater",
-        "TT_print",
+        "TT_leq",
+        "TT_geq",
         "TT_lparen",
         "TT_rparen",
+        "TT_lbracket",
+        "TT_rbracket",
+        "TT_comma",
+        "TT_colon",
+        "TT_if",
+        "TT_elif",
+        "TT_else",
+        "TT_while",
+        "TT_for",
+        "TT_in",
+        "TT_print",
     ]
 
     t_TT_plus = r"\+"
@@ -147,14 +138,29 @@ class Lexer:
     t_TT_dequ = r"=="
     t_TT_less = r"<"
     t_TT_greater = r">"
+    t_TT_leq = r"<="
+    t_TT_geq = r">="
     t_TT_lparen = r"\("
     t_TT_rparen = r"\)"
+    t_TT_lbracket = r"\["
+    t_TT_rbracket = r"\]"
+    t_TT_comma = r","
+    t_TT_colon = r":"
     t_ignore = " \t"
+
+    keywords = {
+        "if": "TT_if",
+        "elif": "TT_elif",
+        "else": "TT_else",
+        "while": "TT_while",
+        "for": "TT_for",
+        "in": "TT_in",
+        "print": "TT_print",
+    }
 
     def t_TT_identifier(self, t):
         r"[a-zA-Z_][a-zA-Z0-9_]*"
-        keywords = {"print": "TT_print"}
-        t.type = keywords.get(t.value, "TT_identifier")
+        t.type = self.keywords.get(t.value, "TT_identifier")
         return t
 
     def t_TT_int(self, t):
@@ -162,9 +168,22 @@ class Lexer:
         t.value = int(t.value)
         return t
 
+    def t_TT_string(self, t):
+        r'"[^"]*"'
+        t.value = t.value[1:-1]  # Remove quotes
+        return t
+
     def t_newline(self, t):
         r"\n+"
         t.lexer.lineno += len(t.value)
+
+    def t_singleline_comment(self, t):
+        r"\#.*"
+        pass  # Ignore single-line comments
+
+    def t_multiline_comment(self, t):
+        r"/\*.*?\*/"
+        pass  # Ignore multi-line comments
 
     def t_error(self, t):
         print(f"Illegal character '{t.value}'")
@@ -180,6 +199,7 @@ class Parser:
     precedence = (
         ('left', 'TT_plus', 'TT_sub'),
         ('left', 'TT_mul', 'TT_div'),
+        ('nonassoc', 'TT_less', 'TT_greater', 'TT_leq', 'TT_geq', 'TT_dequ'),
     )
 
     def __init__(self):
@@ -199,30 +219,146 @@ class Parser:
             p[0] = [p[1]]
 
     def p_statement(self, p):
-        """statement : print_statement"""
+        """statement : assignment
+                     | print_statement
+                     | if_statement
+                     | while_loop
+                     | for_loop"""
         p[0] = p[1]
 
-    def p_print_statement(self, p):
-        "print_statement : TT_print TT_lparen expression TT_rparen"
-        p[0] = PrintStatement(p[3])
+    def p_assignment(self, p):
+        "assignment : TT_identifier TT_equ expression"
+        p[0] = Assignment(Variable(p[1]), p[3])
+
+    def p_if_statement(self, p):
+        """if_statement : TT_if expression TT_colon statement_list elif_clauses else_clause"""
+        p[0] = IfStatement(p[2], p[4], p[5], p[6])
+
+    def p_elif_clauses(self, p):
+        """elif_clauses : elif_clauses TT_elif expression TT_colon statement_list
+                        | empty"""
+        if len(p) == 6:
+            p[0] = p[1] + [(p[3], p[5])]
+        else:
+            p[0] = []
+
+    def p_else_clause(self, p):
+        """else_clause : TT_else TT_colon statement_list
+                       | empty"""
+        if len(p) == 4:
+            p[0] = p[3]
+        else:
+            p[0] = None
+
+    def p_while_loop(self, p):
+        "while_loop : TT_while expression TT_colon statement_list"
+        p[0] = WhileLoop(p[2], p[4])
+
+    def p_for_loop(self, p):
+        "for_loop : TT_for TT_identifier TT_in expression TT_colon statement_list"
+        p[0] = ForLoop(Variable(p[2]), p[4], p[6])
 
     def p_expression(self, p):
         """expression : expression TT_plus expression
                       | expression TT_sub expression
                       | expression TT_mul expression
                       | expression TT_div expression
+                      | expression TT_dequ expression
+                      | expression TT_less expression
+                      | expression TT_greater expression
+                      | expression TT_leq expression
+                      | expression TT_geq expression
+                      | array_access
                       | TT_int
-                      | TT_identifier"""
+                      | TT_string
+                      | TT_identifier
+                      | array"""
         if len(p) == 2:
-            if isinstance(p[1], int):
+            if isinstance(p[1], int) or isinstance(p[1], str):
                 p[0] = Literal(p[1])
+            elif isinstance(p[1], list):
+                p[0] = Array(p[1])
             else:
-                p[0] = Variable(p[1])
+                p[0] = p[1]
         else:
             p[0] = BinaryOp(p[2], p[1], p[3])
 
+    def p_array(self, p):
+        "array : TT_lbracket elements TT_rbracket"
+        p[0] = Array(p[2])
+
+    def p_array_access(self, p):
+        "array_access : TT_identifier TT_lbracket expression TT_rbracket"
+        p[0] = ArrayAccess(array=Variable(p[1]), index=p[3])
+
+    def p_elements(self, p):
+        """elements : elements TT_comma expression
+                    | expression
+                    | empty"""
+        if len(p) == 4:
+            p[0] = p[1] + [p[3]]
+        elif len(p) == 2 and p[1] is not None:
+            p[0] = [p[1]]
+        else:
+            p[0] = []
+
+    def p_print_statement(self, p):
+        "print_statement : TT_print TT_lparen expression TT_rparen"
+        p[0] = PrintStatement(p[3])
+
+    def p_empty(self, p):
+        "empty :"
+        p[0] = None
+
     def parse(self, data):
         return self.parser.parse(data, lexer=self.lexer.lexer)
+
+# --- IR Generator ---
+class IRGenerator:
+    def __init__(self):
+        self.instructions = []
+        self.temp_counter = 0
+        self.label_counter = 0
+
+    def new_temp(self):
+        temp = f"t{self.temp_counter}"
+        self.temp_counter += 1
+        return temp
+
+    def new_label(self):
+        label = f"L{self.label_counter}"
+        self.label_counter += 1
+        return label
+
+    def generate(self, node):
+        if isinstance(node, Program):
+            for statement in node.statements:
+                self.generate(statement)
+        elif isinstance(node, Assignment):
+            temp = self.generate(node.value)
+            self.instructions.append(f"STORE {temp}, {node.variable.name}")
+        elif isinstance(node, PrintStatement):
+            temp = self.generate(node.expression)
+            self.instructions.append(f"PRINT {temp}")
+        elif isinstance(node, BinaryOp):
+            left = self.generate(node.left)
+            right = self.generate(node.right)
+            temp = self.new_temp()
+            self.instructions.append(f"{node.operator.upper()} {left}, {right}, {temp}")
+            return temp
+        elif isinstance(node, Literal):
+            temp = self.new_temp()
+            self.instructions.append(f"LOAD {node.value}, {temp}")
+            return temp
+        elif isinstance(node, Variable):
+            return node.name
+        else:
+            raise Exception(f"Unsupported AST node: {type(node)}")
+
+        return None
+
+    def get_ir(self):
+        return "\n".join(self.instructions)
 
 # --- GUI IDE ---
 class IDE:
@@ -259,18 +395,15 @@ class IDE:
         # Retrieve code from editor
         code = self.editor.get(1.0, tk.END)
 
-        # Run code through parser and semantic analyzer
+        # Run code through parser
         parser = Parser()
-        # symbol_table = SymbolTable()
-        # analyzer = SemanticAnalyzer(symbol_table, self.append_output)
 
         try:
-
             ast = parser.parse(code)
-            self.append_output(f"AST: {ast}\n")
-            # self.append_output("Running Semantic Analysis...\n")
-            # analyzer.analyze(ast)
-            # self.append_output("Semantic analysis completed successfully!\n")
+            ir_gen = IRGenerator()
+            ir_gen.generate(ast)
+            ir = ir_gen.get_ir()
+            self.append_output(f"IR:\n{ir}\n")
         except Exception as e:
             self.append_output(f"Error: {str(e)}\n")
 

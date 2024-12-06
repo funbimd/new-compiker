@@ -1,0 +1,2697 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> statement_list
+Rule 2     statement_list -> statement_list statement
+Rule 3     statement_list -> statement
+Rule 4     statement -> assignment
+Rule 5     statement -> print_statement
+Rule 6     statement -> if_statement
+Rule 7     statement -> while_loop
+Rule 8     statement -> for_loop
+Rule 9     assignment -> TT_identifier TT_equ expression
+Rule 10    assignment -> TT_identifier TT_equ TT_float
+Rule 11    assignment -> TT_identifier TT_equ TT_int
+Rule 12    if_statement -> TT_if expression TT_colon statement_list elif_clauses else_clause
+Rule 13    elif_clauses -> elif_clauses TT_elif expression TT_colon statement_list
+Rule 14    elif_clauses -> empty
+Rule 15    else_clause -> TT_else TT_colon statement_list
+Rule 16    else_clause -> empty
+Rule 17    while_loop -> TT_while expression TT_colon statement_list
+Rule 18    for_loop -> TT_for TT_identifier TT_in expression TT_colon statement_list
+Rule 19    expression -> expression TT_plus expression
+Rule 20    expression -> expression TT_sub expression
+Rule 21    expression -> expression TT_mul expression
+Rule 22    expression -> expression TT_div expression
+Rule 23    expression -> expression TT_pow expression
+Rule 24    expression -> expression TT_dequ expression
+Rule 25    expression -> expression TT_less expression
+Rule 26    expression -> expression TT_greater expression
+Rule 27    expression -> expression TT_leq expression
+Rule 28    expression -> expression TT_geq expression
+Rule 29    expression -> array_access
+Rule 30    expression -> TT_int
+Rule 31    expression -> TT_string
+Rule 32    expression -> TT_float
+Rule 33    expression -> TT_identifier
+Rule 34    expression -> array
+Rule 35    array -> TT_lbracket elements TT_rbracket
+Rule 36    array_access -> TT_identifier TT_lbracket expression TT_rbracket
+Rule 37    elements -> elements TT_comma expression
+Rule 38    elements -> expression
+Rule 39    elements -> empty
+Rule 40    print_statement -> TT_print TT_lparen expression TT_rparen
+Rule 41    print_statement -> TT_print TT_lparen TT_string TT_rparen
+Rule 42    print_statement -> TT_print TT_lparen TT_float TT_rparen
+Rule 43    print_statement -> TT_print TT_lparen TT_int TT_rparen
+Rule 44    print_statement -> TT_print TT_lparen TT_identifier TT_rparen
+Rule 45    empty -> <empty>
+
+Terminals, with rules where they appear
+
+TT_colon             : 12 13 15 17 18
+TT_comma             : 37
+TT_dequ              : 24
+TT_div               : 22
+TT_elif              : 13
+TT_else              : 15
+TT_equ               : 9 10 11
+TT_float             : 10 32 42
+TT_for               : 18
+TT_geq               : 28
+TT_greater           : 26
+TT_identifier        : 9 10 11 18 33 36 44
+TT_if                : 12
+TT_in                : 18
+TT_int               : 11 30 43
+TT_lbracket          : 35 36
+TT_leq               : 27
+TT_less              : 25
+TT_lparen            : 40 41 42 43 44
+TT_mul               : 21
+TT_plus              : 19
+TT_pow               : 23
+TT_print             : 40 41 42 43 44
+TT_rbracket          : 35 36
+TT_rparen            : 40 41 42 43 44
+TT_string            : 31 41
+TT_sub               : 20
+TT_while             : 17
+error                : 
+
+Nonterminals, with rules where they appear
+
+array                : 34
+array_access         : 29
+assignment           : 4
+elements             : 35 37
+elif_clauses         : 12 13
+else_clause          : 12
+empty                : 14 16 39
+expression           : 9 12 13 17 18 19 19 20 20 21 21 22 22 23 23 24 24 25 25 26 26 27 27 28 28 36 37 38 40
+for_loop             : 8
+if_statement         : 6
+print_statement      : 5
+program              : 0
+statement            : 2 3
+statement_list       : 1 2 12 13 15 17 18
+while_loop           : 7
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . statement_list
+    (2) statement_list -> . statement_list statement
+    (3) statement_list -> . statement
+    (4) statement -> . assignment
+    (5) statement -> . print_statement
+    (6) statement -> . if_statement
+    (7) statement -> . while_loop
+    (8) statement -> . for_loop
+    (9) assignment -> . TT_identifier TT_equ expression
+    (10) assignment -> . TT_identifier TT_equ TT_float
+    (11) assignment -> . TT_identifier TT_equ TT_int
+    (40) print_statement -> . TT_print TT_lparen expression TT_rparen
+    (41) print_statement -> . TT_print TT_lparen TT_string TT_rparen
+    (42) print_statement -> . TT_print TT_lparen TT_float TT_rparen
+    (43) print_statement -> . TT_print TT_lparen TT_int TT_rparen
+    (44) print_statement -> . TT_print TT_lparen TT_identifier TT_rparen
+    (12) if_statement -> . TT_if expression TT_colon statement_list elif_clauses else_clause
+    (17) while_loop -> . TT_while expression TT_colon statement_list
+    (18) for_loop -> . TT_for TT_identifier TT_in expression TT_colon statement_list
+
+    TT_identifier   shift and go to state 9
+    TT_print        shift and go to state 10
+    TT_if           shift and go to state 11
+    TT_while        shift and go to state 12
+    TT_for          shift and go to state 13
+
+    program                        shift and go to state 1
+    statement_list                 shift and go to state 2
+    statement                      shift and go to state 3
+    assignment                     shift and go to state 4
+    print_statement                shift and go to state 5
+    if_statement                   shift and go to state 6
+    while_loop                     shift and go to state 7
+    for_loop                       shift and go to state 8
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> statement_list .
+    (2) statement_list -> statement_list . statement
+    (4) statement -> . assignment
+    (5) statement -> . print_statement
+    (6) statement -> . if_statement
+    (7) statement -> . while_loop
+    (8) statement -> . for_loop
+    (9) assignment -> . TT_identifier TT_equ expression
+    (10) assignment -> . TT_identifier TT_equ TT_float
+    (11) assignment -> . TT_identifier TT_equ TT_int
+    (40) print_statement -> . TT_print TT_lparen expression TT_rparen
+    (41) print_statement -> . TT_print TT_lparen TT_string TT_rparen
+    (42) print_statement -> . TT_print TT_lparen TT_float TT_rparen
+    (43) print_statement -> . TT_print TT_lparen TT_int TT_rparen
+    (44) print_statement -> . TT_print TT_lparen TT_identifier TT_rparen
+    (12) if_statement -> . TT_if expression TT_colon statement_list elif_clauses else_clause
+    (17) while_loop -> . TT_while expression TT_colon statement_list
+    (18) for_loop -> . TT_for TT_identifier TT_in expression TT_colon statement_list
+
+    $end            reduce using rule 1 (program -> statement_list .)
+    TT_identifier   shift and go to state 9
+    TT_print        shift and go to state 10
+    TT_if           shift and go to state 11
+    TT_while        shift and go to state 12
+    TT_for          shift and go to state 13
+
+    statement                      shift and go to state 14
+    assignment                     shift and go to state 4
+    print_statement                shift and go to state 5
+    if_statement                   shift and go to state 6
+    while_loop                     shift and go to state 7
+    for_loop                       shift and go to state 8
+
+state 3
+
+    (3) statement_list -> statement .
+
+    TT_identifier   reduce using rule 3 (statement_list -> statement .)
+    TT_print        reduce using rule 3 (statement_list -> statement .)
+    TT_if           reduce using rule 3 (statement_list -> statement .)
+    TT_while        reduce using rule 3 (statement_list -> statement .)
+    TT_for          reduce using rule 3 (statement_list -> statement .)
+    $end            reduce using rule 3 (statement_list -> statement .)
+    TT_elif         reduce using rule 3 (statement_list -> statement .)
+    TT_else         reduce using rule 3 (statement_list -> statement .)
+
+
+state 4
+
+    (4) statement -> assignment .
+
+    TT_identifier   reduce using rule 4 (statement -> assignment .)
+    TT_print        reduce using rule 4 (statement -> assignment .)
+    TT_if           reduce using rule 4 (statement -> assignment .)
+    TT_while        reduce using rule 4 (statement -> assignment .)
+    TT_for          reduce using rule 4 (statement -> assignment .)
+    $end            reduce using rule 4 (statement -> assignment .)
+    TT_elif         reduce using rule 4 (statement -> assignment .)
+    TT_else         reduce using rule 4 (statement -> assignment .)
+
+
+state 5
+
+    (5) statement -> print_statement .
+
+    TT_identifier   reduce using rule 5 (statement -> print_statement .)
+    TT_print        reduce using rule 5 (statement -> print_statement .)
+    TT_if           reduce using rule 5 (statement -> print_statement .)
+    TT_while        reduce using rule 5 (statement -> print_statement .)
+    TT_for          reduce using rule 5 (statement -> print_statement .)
+    $end            reduce using rule 5 (statement -> print_statement .)
+    TT_elif         reduce using rule 5 (statement -> print_statement .)
+    TT_else         reduce using rule 5 (statement -> print_statement .)
+
+
+state 6
+
+    (6) statement -> if_statement .
+
+    TT_identifier   reduce using rule 6 (statement -> if_statement .)
+    TT_print        reduce using rule 6 (statement -> if_statement .)
+    TT_if           reduce using rule 6 (statement -> if_statement .)
+    TT_while        reduce using rule 6 (statement -> if_statement .)
+    TT_for          reduce using rule 6 (statement -> if_statement .)
+    $end            reduce using rule 6 (statement -> if_statement .)
+    TT_elif         reduce using rule 6 (statement -> if_statement .)
+    TT_else         reduce using rule 6 (statement -> if_statement .)
+
+
+state 7
+
+    (7) statement -> while_loop .
+
+    TT_identifier   reduce using rule 7 (statement -> while_loop .)
+    TT_print        reduce using rule 7 (statement -> while_loop .)
+    TT_if           reduce using rule 7 (statement -> while_loop .)
+    TT_while        reduce using rule 7 (statement -> while_loop .)
+    TT_for          reduce using rule 7 (statement -> while_loop .)
+    $end            reduce using rule 7 (statement -> while_loop .)
+    TT_elif         reduce using rule 7 (statement -> while_loop .)
+    TT_else         reduce using rule 7 (statement -> while_loop .)
+
+
+state 8
+
+    (8) statement -> for_loop .
+
+    TT_identifier   reduce using rule 8 (statement -> for_loop .)
+    TT_print        reduce using rule 8 (statement -> for_loop .)
+    TT_if           reduce using rule 8 (statement -> for_loop .)
+    TT_while        reduce using rule 8 (statement -> for_loop .)
+    TT_for          reduce using rule 8 (statement -> for_loop .)
+    $end            reduce using rule 8 (statement -> for_loop .)
+    TT_elif         reduce using rule 8 (statement -> for_loop .)
+    TT_else         reduce using rule 8 (statement -> for_loop .)
+
+
+state 9
+
+    (9) assignment -> TT_identifier . TT_equ expression
+    (10) assignment -> TT_identifier . TT_equ TT_float
+    (11) assignment -> TT_identifier . TT_equ TT_int
+
+    TT_equ          shift and go to state 15
+
+
+state 10
+
+    (40) print_statement -> TT_print . TT_lparen expression TT_rparen
+    (41) print_statement -> TT_print . TT_lparen TT_string TT_rparen
+    (42) print_statement -> TT_print . TT_lparen TT_float TT_rparen
+    (43) print_statement -> TT_print . TT_lparen TT_int TT_rparen
+    (44) print_statement -> TT_print . TT_lparen TT_identifier TT_rparen
+
+    TT_lparen       shift and go to state 16
+
+
+state 11
+
+    (12) if_statement -> TT_if . expression TT_colon statement_list elif_clauses else_clause
+    (19) expression -> . expression TT_plus expression
+    (20) expression -> . expression TT_sub expression
+    (21) expression -> . expression TT_mul expression
+    (22) expression -> . expression TT_div expression
+    (23) expression -> . expression TT_pow expression
+    (24) expression -> . expression TT_dequ expression
+    (25) expression -> . expression TT_less expression
+    (26) expression -> . expression TT_greater expression
+    (27) expression -> . expression TT_leq expression
+    (28) expression -> . expression TT_geq expression
+    (29) expression -> . array_access
+    (30) expression -> . TT_int
+    (31) expression -> . TT_string
+    (32) expression -> . TT_float
+    (33) expression -> . TT_identifier
+    (34) expression -> . array
+    (36) array_access -> . TT_identifier TT_lbracket expression TT_rbracket
+    (35) array -> . TT_lbracket elements TT_rbracket
+
+    TT_int          shift and go to state 19
+    TT_string       shift and go to state 20
+    TT_float        shift and go to state 21
+    TT_identifier   shift and go to state 22
+    TT_lbracket     shift and go to state 24
+
+    expression                     shift and go to state 17
+    array_access                   shift and go to state 18
+    array                          shift and go to state 23
+
+state 12
+
+    (17) while_loop -> TT_while . expression TT_colon statement_list
+    (19) expression -> . expression TT_plus expression
+    (20) expression -> . expression TT_sub expression
+    (21) expression -> . expression TT_mul expression
+    (22) expression -> . expression TT_div expression
+    (23) expression -> . expression TT_pow expression
+    (24) expression -> . expression TT_dequ expression
+    (25) expression -> . expression TT_less expression
+    (26) expression -> . expression TT_greater expression
+    (27) expression -> . expression TT_leq expression
+    (28) expression -> . expression TT_geq expression
+    (29) expression -> . array_access
+    (30) expression -> . TT_int
+    (31) expression -> . TT_string
+    (32) expression -> . TT_float
+    (33) expression -> . TT_identifier
+    (34) expression -> . array
+    (36) array_access -> . TT_identifier TT_lbracket expression TT_rbracket
+    (35) array -> . TT_lbracket elements TT_rbracket
+
+    TT_int          shift and go to state 19
+    TT_string       shift and go to state 20
+    TT_float        shift and go to state 21
+    TT_identifier   shift and go to state 22
+    TT_lbracket     shift and go to state 24
+
+    expression                     shift and go to state 25
+    array_access                   shift and go to state 18
+    array                          shift and go to state 23
+
+state 13
+
+    (18) for_loop -> TT_for . TT_identifier TT_in expression TT_colon statement_list
+
+    TT_identifier   shift and go to state 26
+
+
+state 14
+
+    (2) statement_list -> statement_list statement .
+
+    TT_identifier   reduce using rule 2 (statement_list -> statement_list statement .)
+    TT_print        reduce using rule 2 (statement_list -> statement_list statement .)
+    TT_if           reduce using rule 2 (statement_list -> statement_list statement .)
+    TT_while        reduce using rule 2 (statement_list -> statement_list statement .)
+    TT_for          reduce using rule 2 (statement_list -> statement_list statement .)
+    $end            reduce using rule 2 (statement_list -> statement_list statement .)
+    TT_elif         reduce using rule 2 (statement_list -> statement_list statement .)
+    TT_else         reduce using rule 2 (statement_list -> statement_list statement .)
+
+
+state 15
+
+    (9) assignment -> TT_identifier TT_equ . expression
+    (10) assignment -> TT_identifier TT_equ . TT_float
+    (11) assignment -> TT_identifier TT_equ . TT_int
+    (19) expression -> . expression TT_plus expression
+    (20) expression -> . expression TT_sub expression
+    (21) expression -> . expression TT_mul expression
+    (22) expression -> . expression TT_div expression
+    (23) expression -> . expression TT_pow expression
+    (24) expression -> . expression TT_dequ expression
+    (25) expression -> . expression TT_less expression
+    (26) expression -> . expression TT_greater expression
+    (27) expression -> . expression TT_leq expression
+    (28) expression -> . expression TT_geq expression
+    (29) expression -> . array_access
+    (30) expression -> . TT_int
+    (31) expression -> . TT_string
+    (32) expression -> . TT_float
+    (33) expression -> . TT_identifier
+    (34) expression -> . array
+    (36) array_access -> . TT_identifier TT_lbracket expression TT_rbracket
+    (35) array -> . TT_lbracket elements TT_rbracket
+
+    TT_float        shift and go to state 28
+    TT_int          shift and go to state 29
+    TT_string       shift and go to state 20
+    TT_identifier   shift and go to state 22
+    TT_lbracket     shift and go to state 24
+
+    expression                     shift and go to state 27
+    array_access                   shift and go to state 18
+    array                          shift and go to state 23
+
+state 16
+
+    (40) print_statement -> TT_print TT_lparen . expression TT_rparen
+    (41) print_statement -> TT_print TT_lparen . TT_string TT_rparen
+    (42) print_statement -> TT_print TT_lparen . TT_float TT_rparen
+    (43) print_statement -> TT_print TT_lparen . TT_int TT_rparen
+    (44) print_statement -> TT_print TT_lparen . TT_identifier TT_rparen
+    (19) expression -> . expression TT_plus expression
+    (20) expression -> . expression TT_sub expression
+    (21) expression -> . expression TT_mul expression
+    (22) expression -> . expression TT_div expression
+    (23) expression -> . expression TT_pow expression
+    (24) expression -> . expression TT_dequ expression
+    (25) expression -> . expression TT_less expression
+    (26) expression -> . expression TT_greater expression
+    (27) expression -> . expression TT_leq expression
+    (28) expression -> . expression TT_geq expression
+    (29) expression -> . array_access
+    (30) expression -> . TT_int
+    (31) expression -> . TT_string
+    (32) expression -> . TT_float
+    (33) expression -> . TT_identifier
+    (34) expression -> . array
+    (36) array_access -> . TT_identifier TT_lbracket expression TT_rbracket
+    (35) array -> . TT_lbracket elements TT_rbracket
+
+    TT_string       shift and go to state 31
+    TT_float        shift and go to state 32
+    TT_int          shift and go to state 33
+    TT_identifier   shift and go to state 34
+    TT_lbracket     shift and go to state 24
+
+    expression                     shift and go to state 30
+    array_access                   shift and go to state 18
+    array                          shift and go to state 23
+
+state 17
+
+    (12) if_statement -> TT_if expression . TT_colon statement_list elif_clauses else_clause
+    (19) expression -> expression . TT_plus expression
+    (20) expression -> expression . TT_sub expression
+    (21) expression -> expression . TT_mul expression
+    (22) expression -> expression . TT_div expression
+    (23) expression -> expression . TT_pow expression
+    (24) expression -> expression . TT_dequ expression
+    (25) expression -> expression . TT_less expression
+    (26) expression -> expression . TT_greater expression
+    (27) expression -> expression . TT_leq expression
+    (28) expression -> expression . TT_geq expression
+
+    TT_colon        shift and go to state 35
+    TT_plus         shift and go to state 36
+    TT_sub          shift and go to state 37
+    TT_mul          shift and go to state 38
+    TT_div          shift and go to state 39
+    TT_pow          shift and go to state 40
+    TT_dequ         shift and go to state 41
+    TT_less         shift and go to state 42
+    TT_greater      shift and go to state 43
+    TT_leq          shift and go to state 44
+    TT_geq          shift and go to state 45
+
+
+state 18
+
+    (29) expression -> array_access .
+
+    TT_colon        reduce using rule 29 (expression -> array_access .)
+    TT_plus         reduce using rule 29 (expression -> array_access .)
+    TT_sub          reduce using rule 29 (expression -> array_access .)
+    TT_mul          reduce using rule 29 (expression -> array_access .)
+    TT_div          reduce using rule 29 (expression -> array_access .)
+    TT_pow          reduce using rule 29 (expression -> array_access .)
+    TT_dequ         reduce using rule 29 (expression -> array_access .)
+    TT_less         reduce using rule 29 (expression -> array_access .)
+    TT_greater      reduce using rule 29 (expression -> array_access .)
+    TT_leq          reduce using rule 29 (expression -> array_access .)
+    TT_geq          reduce using rule 29 (expression -> array_access .)
+    TT_identifier   reduce using rule 29 (expression -> array_access .)
+    TT_print        reduce using rule 29 (expression -> array_access .)
+    TT_if           reduce using rule 29 (expression -> array_access .)
+    TT_while        reduce using rule 29 (expression -> array_access .)
+    TT_for          reduce using rule 29 (expression -> array_access .)
+    $end            reduce using rule 29 (expression -> array_access .)
+    TT_elif         reduce using rule 29 (expression -> array_access .)
+    TT_else         reduce using rule 29 (expression -> array_access .)
+    TT_rparen       reduce using rule 29 (expression -> array_access .)
+    TT_rbracket     reduce using rule 29 (expression -> array_access .)
+    TT_comma        reduce using rule 29 (expression -> array_access .)
+
+
+state 19
+
+    (30) expression -> TT_int .
+
+    TT_colon        reduce using rule 30 (expression -> TT_int .)
+    TT_plus         reduce using rule 30 (expression -> TT_int .)
+    TT_sub          reduce using rule 30 (expression -> TT_int .)
+    TT_mul          reduce using rule 30 (expression -> TT_int .)
+    TT_div          reduce using rule 30 (expression -> TT_int .)
+    TT_pow          reduce using rule 30 (expression -> TT_int .)
+    TT_dequ         reduce using rule 30 (expression -> TT_int .)
+    TT_less         reduce using rule 30 (expression -> TT_int .)
+    TT_greater      reduce using rule 30 (expression -> TT_int .)
+    TT_leq          reduce using rule 30 (expression -> TT_int .)
+    TT_geq          reduce using rule 30 (expression -> TT_int .)
+    TT_rbracket     reduce using rule 30 (expression -> TT_int .)
+    TT_comma        reduce using rule 30 (expression -> TT_int .)
+    TT_identifier   reduce using rule 30 (expression -> TT_int .)
+    TT_print        reduce using rule 30 (expression -> TT_int .)
+    TT_if           reduce using rule 30 (expression -> TT_int .)
+    TT_while        reduce using rule 30 (expression -> TT_int .)
+    TT_for          reduce using rule 30 (expression -> TT_int .)
+    $end            reduce using rule 30 (expression -> TT_int .)
+    TT_elif         reduce using rule 30 (expression -> TT_int .)
+    TT_else         reduce using rule 30 (expression -> TT_int .)
+    TT_rparen       reduce using rule 30 (expression -> TT_int .)
+
+
+state 20
+
+    (31) expression -> TT_string .
+
+    TT_colon        reduce using rule 31 (expression -> TT_string .)
+    TT_plus         reduce using rule 31 (expression -> TT_string .)
+    TT_sub          reduce using rule 31 (expression -> TT_string .)
+    TT_mul          reduce using rule 31 (expression -> TT_string .)
+    TT_div          reduce using rule 31 (expression -> TT_string .)
+    TT_pow          reduce using rule 31 (expression -> TT_string .)
+    TT_dequ         reduce using rule 31 (expression -> TT_string .)
+    TT_less         reduce using rule 31 (expression -> TT_string .)
+    TT_greater      reduce using rule 31 (expression -> TT_string .)
+    TT_leq          reduce using rule 31 (expression -> TT_string .)
+    TT_geq          reduce using rule 31 (expression -> TT_string .)
+    TT_identifier   reduce using rule 31 (expression -> TT_string .)
+    TT_print        reduce using rule 31 (expression -> TT_string .)
+    TT_if           reduce using rule 31 (expression -> TT_string .)
+    TT_while        reduce using rule 31 (expression -> TT_string .)
+    TT_for          reduce using rule 31 (expression -> TT_string .)
+    $end            reduce using rule 31 (expression -> TT_string .)
+    TT_elif         reduce using rule 31 (expression -> TT_string .)
+    TT_else         reduce using rule 31 (expression -> TT_string .)
+    TT_rbracket     reduce using rule 31 (expression -> TT_string .)
+    TT_comma        reduce using rule 31 (expression -> TT_string .)
+    TT_rparen       reduce using rule 31 (expression -> TT_string .)
+
+
+state 21
+
+    (32) expression -> TT_float .
+
+    TT_colon        reduce using rule 32 (expression -> TT_float .)
+    TT_plus         reduce using rule 32 (expression -> TT_float .)
+    TT_sub          reduce using rule 32 (expression -> TT_float .)
+    TT_mul          reduce using rule 32 (expression -> TT_float .)
+    TT_div          reduce using rule 32 (expression -> TT_float .)
+    TT_pow          reduce using rule 32 (expression -> TT_float .)
+    TT_dequ         reduce using rule 32 (expression -> TT_float .)
+    TT_less         reduce using rule 32 (expression -> TT_float .)
+    TT_greater      reduce using rule 32 (expression -> TT_float .)
+    TT_leq          reduce using rule 32 (expression -> TT_float .)
+    TT_geq          reduce using rule 32 (expression -> TT_float .)
+    TT_rbracket     reduce using rule 32 (expression -> TT_float .)
+    TT_comma        reduce using rule 32 (expression -> TT_float .)
+    TT_identifier   reduce using rule 32 (expression -> TT_float .)
+    TT_print        reduce using rule 32 (expression -> TT_float .)
+    TT_if           reduce using rule 32 (expression -> TT_float .)
+    TT_while        reduce using rule 32 (expression -> TT_float .)
+    TT_for          reduce using rule 32 (expression -> TT_float .)
+    $end            reduce using rule 32 (expression -> TT_float .)
+    TT_elif         reduce using rule 32 (expression -> TT_float .)
+    TT_else         reduce using rule 32 (expression -> TT_float .)
+    TT_rparen       reduce using rule 32 (expression -> TT_float .)
+
+
+state 22
+
+    (33) expression -> TT_identifier .
+    (36) array_access -> TT_identifier . TT_lbracket expression TT_rbracket
+
+    TT_colon        reduce using rule 33 (expression -> TT_identifier .)
+    TT_plus         reduce using rule 33 (expression -> TT_identifier .)
+    TT_sub          reduce using rule 33 (expression -> TT_identifier .)
+    TT_mul          reduce using rule 33 (expression -> TT_identifier .)
+    TT_div          reduce using rule 33 (expression -> TT_identifier .)
+    TT_pow          reduce using rule 33 (expression -> TT_identifier .)
+    TT_dequ         reduce using rule 33 (expression -> TT_identifier .)
+    TT_less         reduce using rule 33 (expression -> TT_identifier .)
+    TT_greater      reduce using rule 33 (expression -> TT_identifier .)
+    TT_leq          reduce using rule 33 (expression -> TT_identifier .)
+    TT_geq          reduce using rule 33 (expression -> TT_identifier .)
+    TT_identifier   reduce using rule 33 (expression -> TT_identifier .)
+    TT_print        reduce using rule 33 (expression -> TT_identifier .)
+    TT_if           reduce using rule 33 (expression -> TT_identifier .)
+    TT_while        reduce using rule 33 (expression -> TT_identifier .)
+    TT_for          reduce using rule 33 (expression -> TT_identifier .)
+    $end            reduce using rule 33 (expression -> TT_identifier .)
+    TT_elif         reduce using rule 33 (expression -> TT_identifier .)
+    TT_else         reduce using rule 33 (expression -> TT_identifier .)
+    TT_rbracket     reduce using rule 33 (expression -> TT_identifier .)
+    TT_comma        reduce using rule 33 (expression -> TT_identifier .)
+    TT_rparen       reduce using rule 33 (expression -> TT_identifier .)
+    TT_lbracket     shift and go to state 46
+
+
+state 23
+
+    (34) expression -> array .
+
+    TT_colon        reduce using rule 34 (expression -> array .)
+    TT_plus         reduce using rule 34 (expression -> array .)
+    TT_sub          reduce using rule 34 (expression -> array .)
+    TT_mul          reduce using rule 34 (expression -> array .)
+    TT_div          reduce using rule 34 (expression -> array .)
+    TT_pow          reduce using rule 34 (expression -> array .)
+    TT_dequ         reduce using rule 34 (expression -> array .)
+    TT_less         reduce using rule 34 (expression -> array .)
+    TT_greater      reduce using rule 34 (expression -> array .)
+    TT_leq          reduce using rule 34 (expression -> array .)
+    TT_geq          reduce using rule 34 (expression -> array .)
+    TT_identifier   reduce using rule 34 (expression -> array .)
+    TT_print        reduce using rule 34 (expression -> array .)
+    TT_if           reduce using rule 34 (expression -> array .)
+    TT_while        reduce using rule 34 (expression -> array .)
+    TT_for          reduce using rule 34 (expression -> array .)
+    $end            reduce using rule 34 (expression -> array .)
+    TT_elif         reduce using rule 34 (expression -> array .)
+    TT_else         reduce using rule 34 (expression -> array .)
+    TT_rparen       reduce using rule 34 (expression -> array .)
+    TT_rbracket     reduce using rule 34 (expression -> array .)
+    TT_comma        reduce using rule 34 (expression -> array .)
+
+
+state 24
+
+    (35) array -> TT_lbracket . elements TT_rbracket
+    (37) elements -> . elements TT_comma expression
+    (38) elements -> . expression
+    (39) elements -> . empty
+    (19) expression -> . expression TT_plus expression
+    (20) expression -> . expression TT_sub expression
+    (21) expression -> . expression TT_mul expression
+    (22) expression -> . expression TT_div expression
+    (23) expression -> . expression TT_pow expression
+    (24) expression -> . expression TT_dequ expression
+    (25) expression -> . expression TT_less expression
+    (26) expression -> . expression TT_greater expression
+    (27) expression -> . expression TT_leq expression
+    (28) expression -> . expression TT_geq expression
+    (29) expression -> . array_access
+    (30) expression -> . TT_int
+    (31) expression -> . TT_string
+    (32) expression -> . TT_float
+    (33) expression -> . TT_identifier
+    (34) expression -> . array
+    (45) empty -> .
+    (36) array_access -> . TT_identifier TT_lbracket expression TT_rbracket
+    (35) array -> . TT_lbracket elements TT_rbracket
+
+    TT_int          shift and go to state 19
+    TT_string       shift and go to state 20
+    TT_float        shift and go to state 21
+    TT_identifier   shift and go to state 22
+    TT_rbracket     reduce using rule 45 (empty -> .)
+    TT_comma        reduce using rule 45 (empty -> .)
+    TT_lbracket     shift and go to state 24
+
+    elements                       shift and go to state 47
+    expression                     shift and go to state 48
+    empty                          shift and go to state 49
+    array_access                   shift and go to state 18
+    array                          shift and go to state 23
+
+state 25
+
+    (17) while_loop -> TT_while expression . TT_colon statement_list
+    (19) expression -> expression . TT_plus expression
+    (20) expression -> expression . TT_sub expression
+    (21) expression -> expression . TT_mul expression
+    (22) expression -> expression . TT_div expression
+    (23) expression -> expression . TT_pow expression
+    (24) expression -> expression . TT_dequ expression
+    (25) expression -> expression . TT_less expression
+    (26) expression -> expression . TT_greater expression
+    (27) expression -> expression . TT_leq expression
+    (28) expression -> expression . TT_geq expression
+
+    TT_colon        shift and go to state 50
+    TT_plus         shift and go to state 36
+    TT_sub          shift and go to state 37
+    TT_mul          shift and go to state 38
+    TT_div          shift and go to state 39
+    TT_pow          shift and go to state 40
+    TT_dequ         shift and go to state 41
+    TT_less         shift and go to state 42
+    TT_greater      shift and go to state 43
+    TT_leq          shift and go to state 44
+    TT_geq          shift and go to state 45
+
+
+state 26
+
+    (18) for_loop -> TT_for TT_identifier . TT_in expression TT_colon statement_list
+
+    TT_in           shift and go to state 51
+
+
+state 27
+
+    (9) assignment -> TT_identifier TT_equ expression .
+    (19) expression -> expression . TT_plus expression
+    (20) expression -> expression . TT_sub expression
+    (21) expression -> expression . TT_mul expression
+    (22) expression -> expression . TT_div expression
+    (23) expression -> expression . TT_pow expression
+    (24) expression -> expression . TT_dequ expression
+    (25) expression -> expression . TT_less expression
+    (26) expression -> expression . TT_greater expression
+    (27) expression -> expression . TT_leq expression
+    (28) expression -> expression . TT_geq expression
+
+    TT_identifier   reduce using rule 9 (assignment -> TT_identifier TT_equ expression .)
+    TT_print        reduce using rule 9 (assignment -> TT_identifier TT_equ expression .)
+    TT_if           reduce using rule 9 (assignment -> TT_identifier TT_equ expression .)
+    TT_while        reduce using rule 9 (assignment -> TT_identifier TT_equ expression .)
+    TT_for          reduce using rule 9 (assignment -> TT_identifier TT_equ expression .)
+    $end            reduce using rule 9 (assignment -> TT_identifier TT_equ expression .)
+    TT_elif         reduce using rule 9 (assignment -> TT_identifier TT_equ expression .)
+    TT_else         reduce using rule 9 (assignment -> TT_identifier TT_equ expression .)
+    TT_plus         shift and go to state 36
+    TT_sub          shift and go to state 37
+    TT_mul          shift and go to state 38
+    TT_div          shift and go to state 39
+    TT_pow          shift and go to state 40
+    TT_dequ         shift and go to state 41
+    TT_less         shift and go to state 42
+    TT_greater      shift and go to state 43
+    TT_leq          shift and go to state 44
+    TT_geq          shift and go to state 45
+
+
+state 28
+
+    (10) assignment -> TT_identifier TT_equ TT_float .
+    (32) expression -> TT_float .
+
+  ! reduce/reduce conflict for TT_identifier resolved using rule 10 (assignment -> TT_identifier TT_equ TT_float .)
+  ! reduce/reduce conflict for TT_print resolved using rule 10 (assignment -> TT_identifier TT_equ TT_float .)
+  ! reduce/reduce conflict for TT_if resolved using rule 10 (assignment -> TT_identifier TT_equ TT_float .)
+  ! reduce/reduce conflict for TT_while resolved using rule 10 (assignment -> TT_identifier TT_equ TT_float .)
+  ! reduce/reduce conflict for TT_for resolved using rule 10 (assignment -> TT_identifier TT_equ TT_float .)
+  ! reduce/reduce conflict for $end resolved using rule 10 (assignment -> TT_identifier TT_equ TT_float .)
+  ! reduce/reduce conflict for TT_elif resolved using rule 10 (assignment -> TT_identifier TT_equ TT_float .)
+  ! reduce/reduce conflict for TT_else resolved using rule 10 (assignment -> TT_identifier TT_equ TT_float .)
+    TT_identifier   reduce using rule 10 (assignment -> TT_identifier TT_equ TT_float .)
+    TT_print        reduce using rule 10 (assignment -> TT_identifier TT_equ TT_float .)
+    TT_if           reduce using rule 10 (assignment -> TT_identifier TT_equ TT_float .)
+    TT_while        reduce using rule 10 (assignment -> TT_identifier TT_equ TT_float .)
+    TT_for          reduce using rule 10 (assignment -> TT_identifier TT_equ TT_float .)
+    $end            reduce using rule 10 (assignment -> TT_identifier TT_equ TT_float .)
+    TT_elif         reduce using rule 10 (assignment -> TT_identifier TT_equ TT_float .)
+    TT_else         reduce using rule 10 (assignment -> TT_identifier TT_equ TT_float .)
+    TT_plus         reduce using rule 32 (expression -> TT_float .)
+    TT_sub          reduce using rule 32 (expression -> TT_float .)
+    TT_mul          reduce using rule 32 (expression -> TT_float .)
+    TT_div          reduce using rule 32 (expression -> TT_float .)
+    TT_pow          reduce using rule 32 (expression -> TT_float .)
+    TT_dequ         reduce using rule 32 (expression -> TT_float .)
+    TT_less         reduce using rule 32 (expression -> TT_float .)
+    TT_greater      reduce using rule 32 (expression -> TT_float .)
+    TT_leq          reduce using rule 32 (expression -> TT_float .)
+    TT_geq          reduce using rule 32 (expression -> TT_float .)
+
+  ! TT_identifier   [ reduce using rule 32 (expression -> TT_float .) ]
+  ! TT_print        [ reduce using rule 32 (expression -> TT_float .) ]
+  ! TT_if           [ reduce using rule 32 (expression -> TT_float .) ]
+  ! TT_while        [ reduce using rule 32 (expression -> TT_float .) ]
+  ! TT_for          [ reduce using rule 32 (expression -> TT_float .) ]
+  ! $end            [ reduce using rule 32 (expression -> TT_float .) ]
+  ! TT_elif         [ reduce using rule 32 (expression -> TT_float .) ]
+  ! TT_else         [ reduce using rule 32 (expression -> TT_float .) ]
+
+
+state 29
+
+    (11) assignment -> TT_identifier TT_equ TT_int .
+    (30) expression -> TT_int .
+
+  ! reduce/reduce conflict for TT_identifier resolved using rule 11 (assignment -> TT_identifier TT_equ TT_int .)
+  ! reduce/reduce conflict for TT_print resolved using rule 11 (assignment -> TT_identifier TT_equ TT_int .)
+  ! reduce/reduce conflict for TT_if resolved using rule 11 (assignment -> TT_identifier TT_equ TT_int .)
+  ! reduce/reduce conflict for TT_while resolved using rule 11 (assignment -> TT_identifier TT_equ TT_int .)
+  ! reduce/reduce conflict for TT_for resolved using rule 11 (assignment -> TT_identifier TT_equ TT_int .)
+  ! reduce/reduce conflict for $end resolved using rule 11 (assignment -> TT_identifier TT_equ TT_int .)
+  ! reduce/reduce conflict for TT_elif resolved using rule 11 (assignment -> TT_identifier TT_equ TT_int .)
+  ! reduce/reduce conflict for TT_else resolved using rule 11 (assignment -> TT_identifier TT_equ TT_int .)
+    TT_identifier   reduce using rule 11 (assignment -> TT_identifier TT_equ TT_int .)
+    TT_print        reduce using rule 11 (assignment -> TT_identifier TT_equ TT_int .)
+    TT_if           reduce using rule 11 (assignment -> TT_identifier TT_equ TT_int .)
+    TT_while        reduce using rule 11 (assignment -> TT_identifier TT_equ TT_int .)
+    TT_for          reduce using rule 11 (assignment -> TT_identifier TT_equ TT_int .)
+    $end            reduce using rule 11 (assignment -> TT_identifier TT_equ TT_int .)
+    TT_elif         reduce using rule 11 (assignment -> TT_identifier TT_equ TT_int .)
+    TT_else         reduce using rule 11 (assignment -> TT_identifier TT_equ TT_int .)
+    TT_plus         reduce using rule 30 (expression -> TT_int .)
+    TT_sub          reduce using rule 30 (expression -> TT_int .)
+    TT_mul          reduce using rule 30 (expression -> TT_int .)
+    TT_div          reduce using rule 30 (expression -> TT_int .)
+    TT_pow          reduce using rule 30 (expression -> TT_int .)
+    TT_dequ         reduce using rule 30 (expression -> TT_int .)
+    TT_less         reduce using rule 30 (expression -> TT_int .)
+    TT_greater      reduce using rule 30 (expression -> TT_int .)
+    TT_leq          reduce using rule 30 (expression -> TT_int .)
+    TT_geq          reduce using rule 30 (expression -> TT_int .)
+
+  ! TT_identifier   [ reduce using rule 30 (expression -> TT_int .) ]
+  ! TT_print        [ reduce using rule 30 (expression -> TT_int .) ]
+  ! TT_if           [ reduce using rule 30 (expression -> TT_int .) ]
+  ! TT_while        [ reduce using rule 30 (expression -> TT_int .) ]
+  ! TT_for          [ reduce using rule 30 (expression -> TT_int .) ]
+  ! $end            [ reduce using rule 30 (expression -> TT_int .) ]
+  ! TT_elif         [ reduce using rule 30 (expression -> TT_int .) ]
+  ! TT_else         [ reduce using rule 30 (expression -> TT_int .) ]
+
+
+state 30
+
+    (40) print_statement -> TT_print TT_lparen expression . TT_rparen
+    (19) expression -> expression . TT_plus expression
+    (20) expression -> expression . TT_sub expression
+    (21) expression -> expression . TT_mul expression
+    (22) expression -> expression . TT_div expression
+    (23) expression -> expression . TT_pow expression
+    (24) expression -> expression . TT_dequ expression
+    (25) expression -> expression . TT_less expression
+    (26) expression -> expression . TT_greater expression
+    (27) expression -> expression . TT_leq expression
+    (28) expression -> expression . TT_geq expression
+
+    TT_rparen       shift and go to state 52
+    TT_plus         shift and go to state 36
+    TT_sub          shift and go to state 37
+    TT_mul          shift and go to state 38
+    TT_div          shift and go to state 39
+    TT_pow          shift and go to state 40
+    TT_dequ         shift and go to state 41
+    TT_less         shift and go to state 42
+    TT_greater      shift and go to state 43
+    TT_leq          shift and go to state 44
+    TT_geq          shift and go to state 45
+
+
+state 31
+
+    (41) print_statement -> TT_print TT_lparen TT_string . TT_rparen
+    (31) expression -> TT_string .
+
+  ! shift/reduce conflict for TT_rparen resolved as shift
+    TT_rparen       shift and go to state 53
+    TT_plus         reduce using rule 31 (expression -> TT_string .)
+    TT_sub          reduce using rule 31 (expression -> TT_string .)
+    TT_mul          reduce using rule 31 (expression -> TT_string .)
+    TT_div          reduce using rule 31 (expression -> TT_string .)
+    TT_pow          reduce using rule 31 (expression -> TT_string .)
+    TT_dequ         reduce using rule 31 (expression -> TT_string .)
+    TT_less         reduce using rule 31 (expression -> TT_string .)
+    TT_greater      reduce using rule 31 (expression -> TT_string .)
+    TT_leq          reduce using rule 31 (expression -> TT_string .)
+    TT_geq          reduce using rule 31 (expression -> TT_string .)
+
+  ! TT_rparen       [ reduce using rule 31 (expression -> TT_string .) ]
+
+
+state 32
+
+    (42) print_statement -> TT_print TT_lparen TT_float . TT_rparen
+    (32) expression -> TT_float .
+
+  ! shift/reduce conflict for TT_rparen resolved as shift
+    TT_rparen       shift and go to state 54
+    TT_plus         reduce using rule 32 (expression -> TT_float .)
+    TT_sub          reduce using rule 32 (expression -> TT_float .)
+    TT_mul          reduce using rule 32 (expression -> TT_float .)
+    TT_div          reduce using rule 32 (expression -> TT_float .)
+    TT_pow          reduce using rule 32 (expression -> TT_float .)
+    TT_dequ         reduce using rule 32 (expression -> TT_float .)
+    TT_less         reduce using rule 32 (expression -> TT_float .)
+    TT_greater      reduce using rule 32 (expression -> TT_float .)
+    TT_leq          reduce using rule 32 (expression -> TT_float .)
+    TT_geq          reduce using rule 32 (expression -> TT_float .)
+
+  ! TT_rparen       [ reduce using rule 32 (expression -> TT_float .) ]
+
+
+state 33
+
+    (43) print_statement -> TT_print TT_lparen TT_int . TT_rparen
+    (30) expression -> TT_int .
+
+  ! shift/reduce conflict for TT_rparen resolved as shift
+    TT_rparen       shift and go to state 55
+    TT_plus         reduce using rule 30 (expression -> TT_int .)
+    TT_sub          reduce using rule 30 (expression -> TT_int .)
+    TT_mul          reduce using rule 30 (expression -> TT_int .)
+    TT_div          reduce using rule 30 (expression -> TT_int .)
+    TT_pow          reduce using rule 30 (expression -> TT_int .)
+    TT_dequ         reduce using rule 30 (expression -> TT_int .)
+    TT_less         reduce using rule 30 (expression -> TT_int .)
+    TT_greater      reduce using rule 30 (expression -> TT_int .)
+    TT_leq          reduce using rule 30 (expression -> TT_int .)
+    TT_geq          reduce using rule 30 (expression -> TT_int .)
+
+  ! TT_rparen       [ reduce using rule 30 (expression -> TT_int .) ]
+
+
+state 34
+
+    (44) print_statement -> TT_print TT_lparen TT_identifier . TT_rparen
+    (33) expression -> TT_identifier .
+    (36) array_access -> TT_identifier . TT_lbracket expression TT_rbracket
+
+  ! shift/reduce conflict for TT_rparen resolved as shift
+    TT_rparen       shift and go to state 56
+    TT_plus         reduce using rule 33 (expression -> TT_identifier .)
+    TT_sub          reduce using rule 33 (expression -> TT_identifier .)
+    TT_mul          reduce using rule 33 (expression -> TT_identifier .)
+    TT_div          reduce using rule 33 (expression -> TT_identifier .)
+    TT_pow          reduce using rule 33 (expression -> TT_identifier .)
+    TT_dequ         reduce using rule 33 (expression -> TT_identifier .)
+    TT_less         reduce using rule 33 (expression -> TT_identifier .)
+    TT_greater      reduce using rule 33 (expression -> TT_identifier .)
+    TT_leq          reduce using rule 33 (expression -> TT_identifier .)
+    TT_geq          reduce using rule 33 (expression -> TT_identifier .)
+    TT_lbracket     shift and go to state 46
+
+  ! TT_rparen       [ reduce using rule 33 (expression -> TT_identifier .) ]
+
+
+state 35
+
+    (12) if_statement -> TT_if expression TT_colon . statement_list elif_clauses else_clause
+    (2) statement_list -> . statement_list statement
+    (3) statement_list -> . statement
+    (4) statement -> . assignment
+    (5) statement -> . print_statement
+    (6) statement -> . if_statement
+    (7) statement -> . while_loop
+    (8) statement -> . for_loop
+    (9) assignment -> . TT_identifier TT_equ expression
+    (10) assignment -> . TT_identifier TT_equ TT_float
+    (11) assignment -> . TT_identifier TT_equ TT_int
+    (40) print_statement -> . TT_print TT_lparen expression TT_rparen
+    (41) print_statement -> . TT_print TT_lparen TT_string TT_rparen
+    (42) print_statement -> . TT_print TT_lparen TT_float TT_rparen
+    (43) print_statement -> . TT_print TT_lparen TT_int TT_rparen
+    (44) print_statement -> . TT_print TT_lparen TT_identifier TT_rparen
+    (12) if_statement -> . TT_if expression TT_colon statement_list elif_clauses else_clause
+    (17) while_loop -> . TT_while expression TT_colon statement_list
+    (18) for_loop -> . TT_for TT_identifier TT_in expression TT_colon statement_list
+
+    TT_identifier   shift and go to state 9
+    TT_print        shift and go to state 10
+    TT_if           shift and go to state 11
+    TT_while        shift and go to state 12
+    TT_for          shift and go to state 13
+
+    statement_list                 shift and go to state 57
+    statement                      shift and go to state 3
+    assignment                     shift and go to state 4
+    print_statement                shift and go to state 5
+    if_statement                   shift and go to state 6
+    while_loop                     shift and go to state 7
+    for_loop                       shift and go to state 8
+
+state 36
+
+    (19) expression -> expression TT_plus . expression
+    (19) expression -> . expression TT_plus expression
+    (20) expression -> . expression TT_sub expression
+    (21) expression -> . expression TT_mul expression
+    (22) expression -> . expression TT_div expression
+    (23) expression -> . expression TT_pow expression
+    (24) expression -> . expression TT_dequ expression
+    (25) expression -> . expression TT_less expression
+    (26) expression -> . expression TT_greater expression
+    (27) expression -> . expression TT_leq expression
+    (28) expression -> . expression TT_geq expression
+    (29) expression -> . array_access
+    (30) expression -> . TT_int
+    (31) expression -> . TT_string
+    (32) expression -> . TT_float
+    (33) expression -> . TT_identifier
+    (34) expression -> . array
+    (36) array_access -> . TT_identifier TT_lbracket expression TT_rbracket
+    (35) array -> . TT_lbracket elements TT_rbracket
+
+    TT_int          shift and go to state 19
+    TT_string       shift and go to state 20
+    TT_float        shift and go to state 21
+    TT_identifier   shift and go to state 22
+    TT_lbracket     shift and go to state 24
+
+    expression                     shift and go to state 58
+    array_access                   shift and go to state 18
+    array                          shift and go to state 23
+
+state 37
+
+    (20) expression -> expression TT_sub . expression
+    (19) expression -> . expression TT_plus expression
+    (20) expression -> . expression TT_sub expression
+    (21) expression -> . expression TT_mul expression
+    (22) expression -> . expression TT_div expression
+    (23) expression -> . expression TT_pow expression
+    (24) expression -> . expression TT_dequ expression
+    (25) expression -> . expression TT_less expression
+    (26) expression -> . expression TT_greater expression
+    (27) expression -> . expression TT_leq expression
+    (28) expression -> . expression TT_geq expression
+    (29) expression -> . array_access
+    (30) expression -> . TT_int
+    (31) expression -> . TT_string
+    (32) expression -> . TT_float
+    (33) expression -> . TT_identifier
+    (34) expression -> . array
+    (36) array_access -> . TT_identifier TT_lbracket expression TT_rbracket
+    (35) array -> . TT_lbracket elements TT_rbracket
+
+    TT_int          shift and go to state 19
+    TT_string       shift and go to state 20
+    TT_float        shift and go to state 21
+    TT_identifier   shift and go to state 22
+    TT_lbracket     shift and go to state 24
+
+    expression                     shift and go to state 59
+    array_access                   shift and go to state 18
+    array                          shift and go to state 23
+
+state 38
+
+    (21) expression -> expression TT_mul . expression
+    (19) expression -> . expression TT_plus expression
+    (20) expression -> . expression TT_sub expression
+    (21) expression -> . expression TT_mul expression
+    (22) expression -> . expression TT_div expression
+    (23) expression -> . expression TT_pow expression
+    (24) expression -> . expression TT_dequ expression
+    (25) expression -> . expression TT_less expression
+    (26) expression -> . expression TT_greater expression
+    (27) expression -> . expression TT_leq expression
+    (28) expression -> . expression TT_geq expression
+    (29) expression -> . array_access
+    (30) expression -> . TT_int
+    (31) expression -> . TT_string
+    (32) expression -> . TT_float
+    (33) expression -> . TT_identifier
+    (34) expression -> . array
+    (36) array_access -> . TT_identifier TT_lbracket expression TT_rbracket
+    (35) array -> . TT_lbracket elements TT_rbracket
+
+    TT_int          shift and go to state 19
+    TT_string       shift and go to state 20
+    TT_float        shift and go to state 21
+    TT_identifier   shift and go to state 22
+    TT_lbracket     shift and go to state 24
+
+    expression                     shift and go to state 60
+    array_access                   shift and go to state 18
+    array                          shift and go to state 23
+
+state 39
+
+    (22) expression -> expression TT_div . expression
+    (19) expression -> . expression TT_plus expression
+    (20) expression -> . expression TT_sub expression
+    (21) expression -> . expression TT_mul expression
+    (22) expression -> . expression TT_div expression
+    (23) expression -> . expression TT_pow expression
+    (24) expression -> . expression TT_dequ expression
+    (25) expression -> . expression TT_less expression
+    (26) expression -> . expression TT_greater expression
+    (27) expression -> . expression TT_leq expression
+    (28) expression -> . expression TT_geq expression
+    (29) expression -> . array_access
+    (30) expression -> . TT_int
+    (31) expression -> . TT_string
+    (32) expression -> . TT_float
+    (33) expression -> . TT_identifier
+    (34) expression -> . array
+    (36) array_access -> . TT_identifier TT_lbracket expression TT_rbracket
+    (35) array -> . TT_lbracket elements TT_rbracket
+
+    TT_int          shift and go to state 19
+    TT_string       shift and go to state 20
+    TT_float        shift and go to state 21
+    TT_identifier   shift and go to state 22
+    TT_lbracket     shift and go to state 24
+
+    expression                     shift and go to state 61
+    array_access                   shift and go to state 18
+    array                          shift and go to state 23
+
+state 40
+
+    (23) expression -> expression TT_pow . expression
+    (19) expression -> . expression TT_plus expression
+    (20) expression -> . expression TT_sub expression
+    (21) expression -> . expression TT_mul expression
+    (22) expression -> . expression TT_div expression
+    (23) expression -> . expression TT_pow expression
+    (24) expression -> . expression TT_dequ expression
+    (25) expression -> . expression TT_less expression
+    (26) expression -> . expression TT_greater expression
+    (27) expression -> . expression TT_leq expression
+    (28) expression -> . expression TT_geq expression
+    (29) expression -> . array_access
+    (30) expression -> . TT_int
+    (31) expression -> . TT_string
+    (32) expression -> . TT_float
+    (33) expression -> . TT_identifier
+    (34) expression -> . array
+    (36) array_access -> . TT_identifier TT_lbracket expression TT_rbracket
+    (35) array -> . TT_lbracket elements TT_rbracket
+
+    TT_int          shift and go to state 19
+    TT_string       shift and go to state 20
+    TT_float        shift and go to state 21
+    TT_identifier   shift and go to state 22
+    TT_lbracket     shift and go to state 24
+
+    expression                     shift and go to state 62
+    array_access                   shift and go to state 18
+    array                          shift and go to state 23
+
+state 41
+
+    (24) expression -> expression TT_dequ . expression
+    (19) expression -> . expression TT_plus expression
+    (20) expression -> . expression TT_sub expression
+    (21) expression -> . expression TT_mul expression
+    (22) expression -> . expression TT_div expression
+    (23) expression -> . expression TT_pow expression
+    (24) expression -> . expression TT_dequ expression
+    (25) expression -> . expression TT_less expression
+    (26) expression -> . expression TT_greater expression
+    (27) expression -> . expression TT_leq expression
+    (28) expression -> . expression TT_geq expression
+    (29) expression -> . array_access
+    (30) expression -> . TT_int
+    (31) expression -> . TT_string
+    (32) expression -> . TT_float
+    (33) expression -> . TT_identifier
+    (34) expression -> . array
+    (36) array_access -> . TT_identifier TT_lbracket expression TT_rbracket
+    (35) array -> . TT_lbracket elements TT_rbracket
+
+    TT_int          shift and go to state 19
+    TT_string       shift and go to state 20
+    TT_float        shift and go to state 21
+    TT_identifier   shift and go to state 22
+    TT_lbracket     shift and go to state 24
+
+    expression                     shift and go to state 63
+    array_access                   shift and go to state 18
+    array                          shift and go to state 23
+
+state 42
+
+    (25) expression -> expression TT_less . expression
+    (19) expression -> . expression TT_plus expression
+    (20) expression -> . expression TT_sub expression
+    (21) expression -> . expression TT_mul expression
+    (22) expression -> . expression TT_div expression
+    (23) expression -> . expression TT_pow expression
+    (24) expression -> . expression TT_dequ expression
+    (25) expression -> . expression TT_less expression
+    (26) expression -> . expression TT_greater expression
+    (27) expression -> . expression TT_leq expression
+    (28) expression -> . expression TT_geq expression
+    (29) expression -> . array_access
+    (30) expression -> . TT_int
+    (31) expression -> . TT_string
+    (32) expression -> . TT_float
+    (33) expression -> . TT_identifier
+    (34) expression -> . array
+    (36) array_access -> . TT_identifier TT_lbracket expression TT_rbracket
+    (35) array -> . TT_lbracket elements TT_rbracket
+
+    TT_int          shift and go to state 19
+    TT_string       shift and go to state 20
+    TT_float        shift and go to state 21
+    TT_identifier   shift and go to state 22
+    TT_lbracket     shift and go to state 24
+
+    expression                     shift and go to state 64
+    array_access                   shift and go to state 18
+    array                          shift and go to state 23
+
+state 43
+
+    (26) expression -> expression TT_greater . expression
+    (19) expression -> . expression TT_plus expression
+    (20) expression -> . expression TT_sub expression
+    (21) expression -> . expression TT_mul expression
+    (22) expression -> . expression TT_div expression
+    (23) expression -> . expression TT_pow expression
+    (24) expression -> . expression TT_dequ expression
+    (25) expression -> . expression TT_less expression
+    (26) expression -> . expression TT_greater expression
+    (27) expression -> . expression TT_leq expression
+    (28) expression -> . expression TT_geq expression
+    (29) expression -> . array_access
+    (30) expression -> . TT_int
+    (31) expression -> . TT_string
+    (32) expression -> . TT_float
+    (33) expression -> . TT_identifier
+    (34) expression -> . array
+    (36) array_access -> . TT_identifier TT_lbracket expression TT_rbracket
+    (35) array -> . TT_lbracket elements TT_rbracket
+
+    TT_int          shift and go to state 19
+    TT_string       shift and go to state 20
+    TT_float        shift and go to state 21
+    TT_identifier   shift and go to state 22
+    TT_lbracket     shift and go to state 24
+
+    expression                     shift and go to state 65
+    array_access                   shift and go to state 18
+    array                          shift and go to state 23
+
+state 44
+
+    (27) expression -> expression TT_leq . expression
+    (19) expression -> . expression TT_plus expression
+    (20) expression -> . expression TT_sub expression
+    (21) expression -> . expression TT_mul expression
+    (22) expression -> . expression TT_div expression
+    (23) expression -> . expression TT_pow expression
+    (24) expression -> . expression TT_dequ expression
+    (25) expression -> . expression TT_less expression
+    (26) expression -> . expression TT_greater expression
+    (27) expression -> . expression TT_leq expression
+    (28) expression -> . expression TT_geq expression
+    (29) expression -> . array_access
+    (30) expression -> . TT_int
+    (31) expression -> . TT_string
+    (32) expression -> . TT_float
+    (33) expression -> . TT_identifier
+    (34) expression -> . array
+    (36) array_access -> . TT_identifier TT_lbracket expression TT_rbracket
+    (35) array -> . TT_lbracket elements TT_rbracket
+
+    TT_int          shift and go to state 19
+    TT_string       shift and go to state 20
+    TT_float        shift and go to state 21
+    TT_identifier   shift and go to state 22
+    TT_lbracket     shift and go to state 24
+
+    expression                     shift and go to state 66
+    array_access                   shift and go to state 18
+    array                          shift and go to state 23
+
+state 45
+
+    (28) expression -> expression TT_geq . expression
+    (19) expression -> . expression TT_plus expression
+    (20) expression -> . expression TT_sub expression
+    (21) expression -> . expression TT_mul expression
+    (22) expression -> . expression TT_div expression
+    (23) expression -> . expression TT_pow expression
+    (24) expression -> . expression TT_dequ expression
+    (25) expression -> . expression TT_less expression
+    (26) expression -> . expression TT_greater expression
+    (27) expression -> . expression TT_leq expression
+    (28) expression -> . expression TT_geq expression
+    (29) expression -> . array_access
+    (30) expression -> . TT_int
+    (31) expression -> . TT_string
+    (32) expression -> . TT_float
+    (33) expression -> . TT_identifier
+    (34) expression -> . array
+    (36) array_access -> . TT_identifier TT_lbracket expression TT_rbracket
+    (35) array -> . TT_lbracket elements TT_rbracket
+
+    TT_int          shift and go to state 19
+    TT_string       shift and go to state 20
+    TT_float        shift and go to state 21
+    TT_identifier   shift and go to state 22
+    TT_lbracket     shift and go to state 24
+
+    expression                     shift and go to state 67
+    array_access                   shift and go to state 18
+    array                          shift and go to state 23
+
+state 46
+
+    (36) array_access -> TT_identifier TT_lbracket . expression TT_rbracket
+    (19) expression -> . expression TT_plus expression
+    (20) expression -> . expression TT_sub expression
+    (21) expression -> . expression TT_mul expression
+    (22) expression -> . expression TT_div expression
+    (23) expression -> . expression TT_pow expression
+    (24) expression -> . expression TT_dequ expression
+    (25) expression -> . expression TT_less expression
+    (26) expression -> . expression TT_greater expression
+    (27) expression -> . expression TT_leq expression
+    (28) expression -> . expression TT_geq expression
+    (29) expression -> . array_access
+    (30) expression -> . TT_int
+    (31) expression -> . TT_string
+    (32) expression -> . TT_float
+    (33) expression -> . TT_identifier
+    (34) expression -> . array
+    (36) array_access -> . TT_identifier TT_lbracket expression TT_rbracket
+    (35) array -> . TT_lbracket elements TT_rbracket
+
+    TT_int          shift and go to state 19
+    TT_string       shift and go to state 20
+    TT_float        shift and go to state 21
+    TT_identifier   shift and go to state 22
+    TT_lbracket     shift and go to state 24
+
+    expression                     shift and go to state 68
+    array_access                   shift and go to state 18
+    array                          shift and go to state 23
+
+state 47
+
+    (35) array -> TT_lbracket elements . TT_rbracket
+    (37) elements -> elements . TT_comma expression
+
+    TT_rbracket     shift and go to state 69
+    TT_comma        shift and go to state 70
+
+
+state 48
+
+    (38) elements -> expression .
+    (19) expression -> expression . TT_plus expression
+    (20) expression -> expression . TT_sub expression
+    (21) expression -> expression . TT_mul expression
+    (22) expression -> expression . TT_div expression
+    (23) expression -> expression . TT_pow expression
+    (24) expression -> expression . TT_dequ expression
+    (25) expression -> expression . TT_less expression
+    (26) expression -> expression . TT_greater expression
+    (27) expression -> expression . TT_leq expression
+    (28) expression -> expression . TT_geq expression
+
+    TT_rbracket     reduce using rule 38 (elements -> expression .)
+    TT_comma        reduce using rule 38 (elements -> expression .)
+    TT_plus         shift and go to state 36
+    TT_sub          shift and go to state 37
+    TT_mul          shift and go to state 38
+    TT_div          shift and go to state 39
+    TT_pow          shift and go to state 40
+    TT_dequ         shift and go to state 41
+    TT_less         shift and go to state 42
+    TT_greater      shift and go to state 43
+    TT_leq          shift and go to state 44
+    TT_geq          shift and go to state 45
+
+
+state 49
+
+    (39) elements -> empty .
+
+    TT_rbracket     reduce using rule 39 (elements -> empty .)
+    TT_comma        reduce using rule 39 (elements -> empty .)
+
+
+state 50
+
+    (17) while_loop -> TT_while expression TT_colon . statement_list
+    (2) statement_list -> . statement_list statement
+    (3) statement_list -> . statement
+    (4) statement -> . assignment
+    (5) statement -> . print_statement
+    (6) statement -> . if_statement
+    (7) statement -> . while_loop
+    (8) statement -> . for_loop
+    (9) assignment -> . TT_identifier TT_equ expression
+    (10) assignment -> . TT_identifier TT_equ TT_float
+    (11) assignment -> . TT_identifier TT_equ TT_int
+    (40) print_statement -> . TT_print TT_lparen expression TT_rparen
+    (41) print_statement -> . TT_print TT_lparen TT_string TT_rparen
+    (42) print_statement -> . TT_print TT_lparen TT_float TT_rparen
+    (43) print_statement -> . TT_print TT_lparen TT_int TT_rparen
+    (44) print_statement -> . TT_print TT_lparen TT_identifier TT_rparen
+    (12) if_statement -> . TT_if expression TT_colon statement_list elif_clauses else_clause
+    (17) while_loop -> . TT_while expression TT_colon statement_list
+    (18) for_loop -> . TT_for TT_identifier TT_in expression TT_colon statement_list
+
+    TT_identifier   shift and go to state 9
+    TT_print        shift and go to state 10
+    TT_if           shift and go to state 11
+    TT_while        shift and go to state 12
+    TT_for          shift and go to state 13
+
+    statement_list                 shift and go to state 71
+    statement                      shift and go to state 3
+    assignment                     shift and go to state 4
+    print_statement                shift and go to state 5
+    if_statement                   shift and go to state 6
+    while_loop                     shift and go to state 7
+    for_loop                       shift and go to state 8
+
+state 51
+
+    (18) for_loop -> TT_for TT_identifier TT_in . expression TT_colon statement_list
+    (19) expression -> . expression TT_plus expression
+    (20) expression -> . expression TT_sub expression
+    (21) expression -> . expression TT_mul expression
+    (22) expression -> . expression TT_div expression
+    (23) expression -> . expression TT_pow expression
+    (24) expression -> . expression TT_dequ expression
+    (25) expression -> . expression TT_less expression
+    (26) expression -> . expression TT_greater expression
+    (27) expression -> . expression TT_leq expression
+    (28) expression -> . expression TT_geq expression
+    (29) expression -> . array_access
+    (30) expression -> . TT_int
+    (31) expression -> . TT_string
+    (32) expression -> . TT_float
+    (33) expression -> . TT_identifier
+    (34) expression -> . array
+    (36) array_access -> . TT_identifier TT_lbracket expression TT_rbracket
+    (35) array -> . TT_lbracket elements TT_rbracket
+
+    TT_int          shift and go to state 19
+    TT_string       shift and go to state 20
+    TT_float        shift and go to state 21
+    TT_identifier   shift and go to state 22
+    TT_lbracket     shift and go to state 24
+
+    expression                     shift and go to state 72
+    array_access                   shift and go to state 18
+    array                          shift and go to state 23
+
+state 52
+
+    (40) print_statement -> TT_print TT_lparen expression TT_rparen .
+
+    TT_identifier   reduce using rule 40 (print_statement -> TT_print TT_lparen expression TT_rparen .)
+    TT_print        reduce using rule 40 (print_statement -> TT_print TT_lparen expression TT_rparen .)
+    TT_if           reduce using rule 40 (print_statement -> TT_print TT_lparen expression TT_rparen .)
+    TT_while        reduce using rule 40 (print_statement -> TT_print TT_lparen expression TT_rparen .)
+    TT_for          reduce using rule 40 (print_statement -> TT_print TT_lparen expression TT_rparen .)
+    $end            reduce using rule 40 (print_statement -> TT_print TT_lparen expression TT_rparen .)
+    TT_elif         reduce using rule 40 (print_statement -> TT_print TT_lparen expression TT_rparen .)
+    TT_else         reduce using rule 40 (print_statement -> TT_print TT_lparen expression TT_rparen .)
+
+
+state 53
+
+    (41) print_statement -> TT_print TT_lparen TT_string TT_rparen .
+
+    TT_identifier   reduce using rule 41 (print_statement -> TT_print TT_lparen TT_string TT_rparen .)
+    TT_print        reduce using rule 41 (print_statement -> TT_print TT_lparen TT_string TT_rparen .)
+    TT_if           reduce using rule 41 (print_statement -> TT_print TT_lparen TT_string TT_rparen .)
+    TT_while        reduce using rule 41 (print_statement -> TT_print TT_lparen TT_string TT_rparen .)
+    TT_for          reduce using rule 41 (print_statement -> TT_print TT_lparen TT_string TT_rparen .)
+    $end            reduce using rule 41 (print_statement -> TT_print TT_lparen TT_string TT_rparen .)
+    TT_elif         reduce using rule 41 (print_statement -> TT_print TT_lparen TT_string TT_rparen .)
+    TT_else         reduce using rule 41 (print_statement -> TT_print TT_lparen TT_string TT_rparen .)
+
+
+state 54
+
+    (42) print_statement -> TT_print TT_lparen TT_float TT_rparen .
+
+    TT_identifier   reduce using rule 42 (print_statement -> TT_print TT_lparen TT_float TT_rparen .)
+    TT_print        reduce using rule 42 (print_statement -> TT_print TT_lparen TT_float TT_rparen .)
+    TT_if           reduce using rule 42 (print_statement -> TT_print TT_lparen TT_float TT_rparen .)
+    TT_while        reduce using rule 42 (print_statement -> TT_print TT_lparen TT_float TT_rparen .)
+    TT_for          reduce using rule 42 (print_statement -> TT_print TT_lparen TT_float TT_rparen .)
+    $end            reduce using rule 42 (print_statement -> TT_print TT_lparen TT_float TT_rparen .)
+    TT_elif         reduce using rule 42 (print_statement -> TT_print TT_lparen TT_float TT_rparen .)
+    TT_else         reduce using rule 42 (print_statement -> TT_print TT_lparen TT_float TT_rparen .)
+
+
+state 55
+
+    (43) print_statement -> TT_print TT_lparen TT_int TT_rparen .
+
+    TT_identifier   reduce using rule 43 (print_statement -> TT_print TT_lparen TT_int TT_rparen .)
+    TT_print        reduce using rule 43 (print_statement -> TT_print TT_lparen TT_int TT_rparen .)
+    TT_if           reduce using rule 43 (print_statement -> TT_print TT_lparen TT_int TT_rparen .)
+    TT_while        reduce using rule 43 (print_statement -> TT_print TT_lparen TT_int TT_rparen .)
+    TT_for          reduce using rule 43 (print_statement -> TT_print TT_lparen TT_int TT_rparen .)
+    $end            reduce using rule 43 (print_statement -> TT_print TT_lparen TT_int TT_rparen .)
+    TT_elif         reduce using rule 43 (print_statement -> TT_print TT_lparen TT_int TT_rparen .)
+    TT_else         reduce using rule 43 (print_statement -> TT_print TT_lparen TT_int TT_rparen .)
+
+
+state 56
+
+    (44) print_statement -> TT_print TT_lparen TT_identifier TT_rparen .
+
+    TT_identifier   reduce using rule 44 (print_statement -> TT_print TT_lparen TT_identifier TT_rparen .)
+    TT_print        reduce using rule 44 (print_statement -> TT_print TT_lparen TT_identifier TT_rparen .)
+    TT_if           reduce using rule 44 (print_statement -> TT_print TT_lparen TT_identifier TT_rparen .)
+    TT_while        reduce using rule 44 (print_statement -> TT_print TT_lparen TT_identifier TT_rparen .)
+    TT_for          reduce using rule 44 (print_statement -> TT_print TT_lparen TT_identifier TT_rparen .)
+    $end            reduce using rule 44 (print_statement -> TT_print TT_lparen TT_identifier TT_rparen .)
+    TT_elif         reduce using rule 44 (print_statement -> TT_print TT_lparen TT_identifier TT_rparen .)
+    TT_else         reduce using rule 44 (print_statement -> TT_print TT_lparen TT_identifier TT_rparen .)
+
+
+state 57
+
+    (12) if_statement -> TT_if expression TT_colon statement_list . elif_clauses else_clause
+    (2) statement_list -> statement_list . statement
+    (13) elif_clauses -> . elif_clauses TT_elif expression TT_colon statement_list
+    (14) elif_clauses -> . empty
+    (4) statement -> . assignment
+    (5) statement -> . print_statement
+    (6) statement -> . if_statement
+    (7) statement -> . while_loop
+    (8) statement -> . for_loop
+    (45) empty -> .
+    (9) assignment -> . TT_identifier TT_equ expression
+    (10) assignment -> . TT_identifier TT_equ TT_float
+    (11) assignment -> . TT_identifier TT_equ TT_int
+    (40) print_statement -> . TT_print TT_lparen expression TT_rparen
+    (41) print_statement -> . TT_print TT_lparen TT_string TT_rparen
+    (42) print_statement -> . TT_print TT_lparen TT_float TT_rparen
+    (43) print_statement -> . TT_print TT_lparen TT_int TT_rparen
+    (44) print_statement -> . TT_print TT_lparen TT_identifier TT_rparen
+    (12) if_statement -> . TT_if expression TT_colon statement_list elif_clauses else_clause
+    (17) while_loop -> . TT_while expression TT_colon statement_list
+    (18) for_loop -> . TT_for TT_identifier TT_in expression TT_colon statement_list
+
+  ! shift/reduce conflict for TT_identifier resolved as shift
+  ! shift/reduce conflict for TT_print resolved as shift
+  ! shift/reduce conflict for TT_if resolved as shift
+  ! shift/reduce conflict for TT_while resolved as shift
+  ! shift/reduce conflict for TT_for resolved as shift
+    TT_elif         reduce using rule 45 (empty -> .)
+    TT_else         reduce using rule 45 (empty -> .)
+    $end            reduce using rule 45 (empty -> .)
+    TT_identifier   shift and go to state 9
+    TT_print        shift and go to state 10
+    TT_if           shift and go to state 11
+    TT_while        shift and go to state 12
+    TT_for          shift and go to state 13
+
+  ! TT_identifier   [ reduce using rule 45 (empty -> .) ]
+  ! TT_print        [ reduce using rule 45 (empty -> .) ]
+  ! TT_if           [ reduce using rule 45 (empty -> .) ]
+  ! TT_while        [ reduce using rule 45 (empty -> .) ]
+  ! TT_for          [ reduce using rule 45 (empty -> .) ]
+
+    elif_clauses                   shift and go to state 73
+    statement                      shift and go to state 14
+    empty                          shift and go to state 74
+    assignment                     shift and go to state 4
+    print_statement                shift and go to state 5
+    if_statement                   shift and go to state 6
+    while_loop                     shift and go to state 7
+    for_loop                       shift and go to state 8
+
+state 58
+
+    (19) expression -> expression TT_plus expression .
+    (19) expression -> expression . TT_plus expression
+    (20) expression -> expression . TT_sub expression
+    (21) expression -> expression . TT_mul expression
+    (22) expression -> expression . TT_div expression
+    (23) expression -> expression . TT_pow expression
+    (24) expression -> expression . TT_dequ expression
+    (25) expression -> expression . TT_less expression
+    (26) expression -> expression . TT_greater expression
+    (27) expression -> expression . TT_leq expression
+    (28) expression -> expression . TT_geq expression
+
+    TT_colon        reduce using rule 19 (expression -> expression TT_plus expression .)
+    TT_plus         reduce using rule 19 (expression -> expression TT_plus expression .)
+    TT_sub          reduce using rule 19 (expression -> expression TT_plus expression .)
+    TT_identifier   reduce using rule 19 (expression -> expression TT_plus expression .)
+    TT_print        reduce using rule 19 (expression -> expression TT_plus expression .)
+    TT_if           reduce using rule 19 (expression -> expression TT_plus expression .)
+    TT_while        reduce using rule 19 (expression -> expression TT_plus expression .)
+    TT_for          reduce using rule 19 (expression -> expression TT_plus expression .)
+    $end            reduce using rule 19 (expression -> expression TT_plus expression .)
+    TT_elif         reduce using rule 19 (expression -> expression TT_plus expression .)
+    TT_else         reduce using rule 19 (expression -> expression TT_plus expression .)
+    TT_rparen       reduce using rule 19 (expression -> expression TT_plus expression .)
+    TT_rbracket     reduce using rule 19 (expression -> expression TT_plus expression .)
+    TT_comma        reduce using rule 19 (expression -> expression TT_plus expression .)
+    TT_mul          shift and go to state 38
+    TT_div          shift and go to state 39
+    TT_pow          shift and go to state 40
+    TT_dequ         shift and go to state 41
+    TT_less         shift and go to state 42
+    TT_greater      shift and go to state 43
+    TT_leq          shift and go to state 44
+    TT_geq          shift and go to state 45
+
+  ! TT_mul          [ reduce using rule 19 (expression -> expression TT_plus expression .) ]
+  ! TT_div          [ reduce using rule 19 (expression -> expression TT_plus expression .) ]
+  ! TT_pow          [ reduce using rule 19 (expression -> expression TT_plus expression .) ]
+  ! TT_dequ         [ reduce using rule 19 (expression -> expression TT_plus expression .) ]
+  ! TT_less         [ reduce using rule 19 (expression -> expression TT_plus expression .) ]
+  ! TT_greater      [ reduce using rule 19 (expression -> expression TT_plus expression .) ]
+  ! TT_leq          [ reduce using rule 19 (expression -> expression TT_plus expression .) ]
+  ! TT_geq          [ reduce using rule 19 (expression -> expression TT_plus expression .) ]
+  ! TT_plus         [ shift and go to state 36 ]
+  ! TT_sub          [ shift and go to state 37 ]
+
+
+state 59
+
+    (20) expression -> expression TT_sub expression .
+    (19) expression -> expression . TT_plus expression
+    (20) expression -> expression . TT_sub expression
+    (21) expression -> expression . TT_mul expression
+    (22) expression -> expression . TT_div expression
+    (23) expression -> expression . TT_pow expression
+    (24) expression -> expression . TT_dequ expression
+    (25) expression -> expression . TT_less expression
+    (26) expression -> expression . TT_greater expression
+    (27) expression -> expression . TT_leq expression
+    (28) expression -> expression . TT_geq expression
+
+    TT_colon        reduce using rule 20 (expression -> expression TT_sub expression .)
+    TT_plus         reduce using rule 20 (expression -> expression TT_sub expression .)
+    TT_sub          reduce using rule 20 (expression -> expression TT_sub expression .)
+    TT_identifier   reduce using rule 20 (expression -> expression TT_sub expression .)
+    TT_print        reduce using rule 20 (expression -> expression TT_sub expression .)
+    TT_if           reduce using rule 20 (expression -> expression TT_sub expression .)
+    TT_while        reduce using rule 20 (expression -> expression TT_sub expression .)
+    TT_for          reduce using rule 20 (expression -> expression TT_sub expression .)
+    $end            reduce using rule 20 (expression -> expression TT_sub expression .)
+    TT_elif         reduce using rule 20 (expression -> expression TT_sub expression .)
+    TT_else         reduce using rule 20 (expression -> expression TT_sub expression .)
+    TT_rparen       reduce using rule 20 (expression -> expression TT_sub expression .)
+    TT_rbracket     reduce using rule 20 (expression -> expression TT_sub expression .)
+    TT_comma        reduce using rule 20 (expression -> expression TT_sub expression .)
+    TT_mul          shift and go to state 38
+    TT_div          shift and go to state 39
+    TT_pow          shift and go to state 40
+    TT_dequ         shift and go to state 41
+    TT_less         shift and go to state 42
+    TT_greater      shift and go to state 43
+    TT_leq          shift and go to state 44
+    TT_geq          shift and go to state 45
+
+  ! TT_mul          [ reduce using rule 20 (expression -> expression TT_sub expression .) ]
+  ! TT_div          [ reduce using rule 20 (expression -> expression TT_sub expression .) ]
+  ! TT_pow          [ reduce using rule 20 (expression -> expression TT_sub expression .) ]
+  ! TT_dequ         [ reduce using rule 20 (expression -> expression TT_sub expression .) ]
+  ! TT_less         [ reduce using rule 20 (expression -> expression TT_sub expression .) ]
+  ! TT_greater      [ reduce using rule 20 (expression -> expression TT_sub expression .) ]
+  ! TT_leq          [ reduce using rule 20 (expression -> expression TT_sub expression .) ]
+  ! TT_geq          [ reduce using rule 20 (expression -> expression TT_sub expression .) ]
+  ! TT_plus         [ shift and go to state 36 ]
+  ! TT_sub          [ shift and go to state 37 ]
+
+
+state 60
+
+    (21) expression -> expression TT_mul expression .
+    (19) expression -> expression . TT_plus expression
+    (20) expression -> expression . TT_sub expression
+    (21) expression -> expression . TT_mul expression
+    (22) expression -> expression . TT_div expression
+    (23) expression -> expression . TT_pow expression
+    (24) expression -> expression . TT_dequ expression
+    (25) expression -> expression . TT_less expression
+    (26) expression -> expression . TT_greater expression
+    (27) expression -> expression . TT_leq expression
+    (28) expression -> expression . TT_geq expression
+
+    TT_colon        reduce using rule 21 (expression -> expression TT_mul expression .)
+    TT_plus         reduce using rule 21 (expression -> expression TT_mul expression .)
+    TT_sub          reduce using rule 21 (expression -> expression TT_mul expression .)
+    TT_mul          reduce using rule 21 (expression -> expression TT_mul expression .)
+    TT_div          reduce using rule 21 (expression -> expression TT_mul expression .)
+    TT_identifier   reduce using rule 21 (expression -> expression TT_mul expression .)
+    TT_print        reduce using rule 21 (expression -> expression TT_mul expression .)
+    TT_if           reduce using rule 21 (expression -> expression TT_mul expression .)
+    TT_while        reduce using rule 21 (expression -> expression TT_mul expression .)
+    TT_for          reduce using rule 21 (expression -> expression TT_mul expression .)
+    $end            reduce using rule 21 (expression -> expression TT_mul expression .)
+    TT_elif         reduce using rule 21 (expression -> expression TT_mul expression .)
+    TT_else         reduce using rule 21 (expression -> expression TT_mul expression .)
+    TT_rparen       reduce using rule 21 (expression -> expression TT_mul expression .)
+    TT_rbracket     reduce using rule 21 (expression -> expression TT_mul expression .)
+    TT_comma        reduce using rule 21 (expression -> expression TT_mul expression .)
+    TT_pow          shift and go to state 40
+    TT_dequ         shift and go to state 41
+    TT_less         shift and go to state 42
+    TT_greater      shift and go to state 43
+    TT_leq          shift and go to state 44
+    TT_geq          shift and go to state 45
+
+  ! TT_pow          [ reduce using rule 21 (expression -> expression TT_mul expression .) ]
+  ! TT_dequ         [ reduce using rule 21 (expression -> expression TT_mul expression .) ]
+  ! TT_less         [ reduce using rule 21 (expression -> expression TT_mul expression .) ]
+  ! TT_greater      [ reduce using rule 21 (expression -> expression TT_mul expression .) ]
+  ! TT_leq          [ reduce using rule 21 (expression -> expression TT_mul expression .) ]
+  ! TT_geq          [ reduce using rule 21 (expression -> expression TT_mul expression .) ]
+  ! TT_plus         [ shift and go to state 36 ]
+  ! TT_sub          [ shift and go to state 37 ]
+  ! TT_mul          [ shift and go to state 38 ]
+  ! TT_div          [ shift and go to state 39 ]
+
+
+state 61
+
+    (22) expression -> expression TT_div expression .
+    (19) expression -> expression . TT_plus expression
+    (20) expression -> expression . TT_sub expression
+    (21) expression -> expression . TT_mul expression
+    (22) expression -> expression . TT_div expression
+    (23) expression -> expression . TT_pow expression
+    (24) expression -> expression . TT_dequ expression
+    (25) expression -> expression . TT_less expression
+    (26) expression -> expression . TT_greater expression
+    (27) expression -> expression . TT_leq expression
+    (28) expression -> expression . TT_geq expression
+
+    TT_colon        reduce using rule 22 (expression -> expression TT_div expression .)
+    TT_plus         reduce using rule 22 (expression -> expression TT_div expression .)
+    TT_sub          reduce using rule 22 (expression -> expression TT_div expression .)
+    TT_mul          reduce using rule 22 (expression -> expression TT_div expression .)
+    TT_div          reduce using rule 22 (expression -> expression TT_div expression .)
+    TT_identifier   reduce using rule 22 (expression -> expression TT_div expression .)
+    TT_print        reduce using rule 22 (expression -> expression TT_div expression .)
+    TT_if           reduce using rule 22 (expression -> expression TT_div expression .)
+    TT_while        reduce using rule 22 (expression -> expression TT_div expression .)
+    TT_for          reduce using rule 22 (expression -> expression TT_div expression .)
+    $end            reduce using rule 22 (expression -> expression TT_div expression .)
+    TT_elif         reduce using rule 22 (expression -> expression TT_div expression .)
+    TT_else         reduce using rule 22 (expression -> expression TT_div expression .)
+    TT_rparen       reduce using rule 22 (expression -> expression TT_div expression .)
+    TT_rbracket     reduce using rule 22 (expression -> expression TT_div expression .)
+    TT_comma        reduce using rule 22 (expression -> expression TT_div expression .)
+    TT_pow          shift and go to state 40
+    TT_dequ         shift and go to state 41
+    TT_less         shift and go to state 42
+    TT_greater      shift and go to state 43
+    TT_leq          shift and go to state 44
+    TT_geq          shift and go to state 45
+
+  ! TT_pow          [ reduce using rule 22 (expression -> expression TT_div expression .) ]
+  ! TT_dequ         [ reduce using rule 22 (expression -> expression TT_div expression .) ]
+  ! TT_less         [ reduce using rule 22 (expression -> expression TT_div expression .) ]
+  ! TT_greater      [ reduce using rule 22 (expression -> expression TT_div expression .) ]
+  ! TT_leq          [ reduce using rule 22 (expression -> expression TT_div expression .) ]
+  ! TT_geq          [ reduce using rule 22 (expression -> expression TT_div expression .) ]
+  ! TT_plus         [ shift and go to state 36 ]
+  ! TT_sub          [ shift and go to state 37 ]
+  ! TT_mul          [ shift and go to state 38 ]
+  ! TT_div          [ shift and go to state 39 ]
+
+
+state 62
+
+    (23) expression -> expression TT_pow expression .
+    (19) expression -> expression . TT_plus expression
+    (20) expression -> expression . TT_sub expression
+    (21) expression -> expression . TT_mul expression
+    (22) expression -> expression . TT_div expression
+    (23) expression -> expression . TT_pow expression
+    (24) expression -> expression . TT_dequ expression
+    (25) expression -> expression . TT_less expression
+    (26) expression -> expression . TT_greater expression
+    (27) expression -> expression . TT_leq expression
+    (28) expression -> expression . TT_geq expression
+
+    TT_colon        reduce using rule 23 (expression -> expression TT_pow expression .)
+    TT_plus         reduce using rule 23 (expression -> expression TT_pow expression .)
+    TT_sub          reduce using rule 23 (expression -> expression TT_pow expression .)
+    TT_mul          reduce using rule 23 (expression -> expression TT_pow expression .)
+    TT_div          reduce using rule 23 (expression -> expression TT_pow expression .)
+    TT_identifier   reduce using rule 23 (expression -> expression TT_pow expression .)
+    TT_print        reduce using rule 23 (expression -> expression TT_pow expression .)
+    TT_if           reduce using rule 23 (expression -> expression TT_pow expression .)
+    TT_while        reduce using rule 23 (expression -> expression TT_pow expression .)
+    TT_for          reduce using rule 23 (expression -> expression TT_pow expression .)
+    $end            reduce using rule 23 (expression -> expression TT_pow expression .)
+    TT_elif         reduce using rule 23 (expression -> expression TT_pow expression .)
+    TT_else         reduce using rule 23 (expression -> expression TT_pow expression .)
+    TT_rparen       reduce using rule 23 (expression -> expression TT_pow expression .)
+    TT_rbracket     reduce using rule 23 (expression -> expression TT_pow expression .)
+    TT_comma        reduce using rule 23 (expression -> expression TT_pow expression .)
+    TT_pow          shift and go to state 40
+    TT_dequ         shift and go to state 41
+    TT_less         shift and go to state 42
+    TT_greater      shift and go to state 43
+    TT_leq          shift and go to state 44
+    TT_geq          shift and go to state 45
+
+  ! TT_pow          [ reduce using rule 23 (expression -> expression TT_pow expression .) ]
+  ! TT_dequ         [ reduce using rule 23 (expression -> expression TT_pow expression .) ]
+  ! TT_less         [ reduce using rule 23 (expression -> expression TT_pow expression .) ]
+  ! TT_greater      [ reduce using rule 23 (expression -> expression TT_pow expression .) ]
+  ! TT_leq          [ reduce using rule 23 (expression -> expression TT_pow expression .) ]
+  ! TT_geq          [ reduce using rule 23 (expression -> expression TT_pow expression .) ]
+  ! TT_plus         [ shift and go to state 36 ]
+  ! TT_sub          [ shift and go to state 37 ]
+  ! TT_mul          [ shift and go to state 38 ]
+  ! TT_div          [ shift and go to state 39 ]
+
+
+state 63
+
+    (24) expression -> expression TT_dequ expression .
+    (19) expression -> expression . TT_plus expression
+    (20) expression -> expression . TT_sub expression
+    (21) expression -> expression . TT_mul expression
+    (22) expression -> expression . TT_div expression
+    (23) expression -> expression . TT_pow expression
+    (24) expression -> expression . TT_dequ expression
+    (25) expression -> expression . TT_less expression
+    (26) expression -> expression . TT_greater expression
+    (27) expression -> expression . TT_leq expression
+    (28) expression -> expression . TT_geq expression
+
+    TT_colon        reduce using rule 24 (expression -> expression TT_dequ expression .)
+    TT_plus         reduce using rule 24 (expression -> expression TT_dequ expression .)
+    TT_sub          reduce using rule 24 (expression -> expression TT_dequ expression .)
+    TT_mul          reduce using rule 24 (expression -> expression TT_dequ expression .)
+    TT_div          reduce using rule 24 (expression -> expression TT_dequ expression .)
+    TT_pow          reduce using rule 24 (expression -> expression TT_dequ expression .)
+    TT_dequ         reduce using rule 24 (expression -> expression TT_dequ expression .)
+    TT_less         reduce using rule 24 (expression -> expression TT_dequ expression .)
+    TT_greater      reduce using rule 24 (expression -> expression TT_dequ expression .)
+    TT_leq          reduce using rule 24 (expression -> expression TT_dequ expression .)
+    TT_geq          reduce using rule 24 (expression -> expression TT_dequ expression .)
+    TT_identifier   reduce using rule 24 (expression -> expression TT_dequ expression .)
+    TT_print        reduce using rule 24 (expression -> expression TT_dequ expression .)
+    TT_if           reduce using rule 24 (expression -> expression TT_dequ expression .)
+    TT_while        reduce using rule 24 (expression -> expression TT_dequ expression .)
+    TT_for          reduce using rule 24 (expression -> expression TT_dequ expression .)
+    $end            reduce using rule 24 (expression -> expression TT_dequ expression .)
+    TT_elif         reduce using rule 24 (expression -> expression TT_dequ expression .)
+    TT_else         reduce using rule 24 (expression -> expression TT_dequ expression .)
+    TT_rparen       reduce using rule 24 (expression -> expression TT_dequ expression .)
+    TT_rbracket     reduce using rule 24 (expression -> expression TT_dequ expression .)
+    TT_comma        reduce using rule 24 (expression -> expression TT_dequ expression .)
+
+  ! TT_plus         [ shift and go to state 36 ]
+  ! TT_sub          [ shift and go to state 37 ]
+  ! TT_mul          [ shift and go to state 38 ]
+  ! TT_div          [ shift and go to state 39 ]
+  ! TT_pow          [ shift and go to state 40 ]
+  ! TT_dequ         [ shift and go to state 41 ]
+  ! TT_less         [ shift and go to state 42 ]
+  ! TT_greater      [ shift and go to state 43 ]
+  ! TT_leq          [ shift and go to state 44 ]
+  ! TT_geq          [ shift and go to state 45 ]
+
+
+state 64
+
+    (25) expression -> expression TT_less expression .
+    (19) expression -> expression . TT_plus expression
+    (20) expression -> expression . TT_sub expression
+    (21) expression -> expression . TT_mul expression
+    (22) expression -> expression . TT_div expression
+    (23) expression -> expression . TT_pow expression
+    (24) expression -> expression . TT_dequ expression
+    (25) expression -> expression . TT_less expression
+    (26) expression -> expression . TT_greater expression
+    (27) expression -> expression . TT_leq expression
+    (28) expression -> expression . TT_geq expression
+
+    TT_colon        reduce using rule 25 (expression -> expression TT_less expression .)
+    TT_plus         reduce using rule 25 (expression -> expression TT_less expression .)
+    TT_sub          reduce using rule 25 (expression -> expression TT_less expression .)
+    TT_mul          reduce using rule 25 (expression -> expression TT_less expression .)
+    TT_div          reduce using rule 25 (expression -> expression TT_less expression .)
+    TT_pow          reduce using rule 25 (expression -> expression TT_less expression .)
+    TT_dequ         reduce using rule 25 (expression -> expression TT_less expression .)
+    TT_less         reduce using rule 25 (expression -> expression TT_less expression .)
+    TT_greater      reduce using rule 25 (expression -> expression TT_less expression .)
+    TT_leq          reduce using rule 25 (expression -> expression TT_less expression .)
+    TT_geq          reduce using rule 25 (expression -> expression TT_less expression .)
+    TT_identifier   reduce using rule 25 (expression -> expression TT_less expression .)
+    TT_print        reduce using rule 25 (expression -> expression TT_less expression .)
+    TT_if           reduce using rule 25 (expression -> expression TT_less expression .)
+    TT_while        reduce using rule 25 (expression -> expression TT_less expression .)
+    TT_for          reduce using rule 25 (expression -> expression TT_less expression .)
+    $end            reduce using rule 25 (expression -> expression TT_less expression .)
+    TT_elif         reduce using rule 25 (expression -> expression TT_less expression .)
+    TT_else         reduce using rule 25 (expression -> expression TT_less expression .)
+    TT_rparen       reduce using rule 25 (expression -> expression TT_less expression .)
+    TT_rbracket     reduce using rule 25 (expression -> expression TT_less expression .)
+    TT_comma        reduce using rule 25 (expression -> expression TT_less expression .)
+
+  ! TT_plus         [ shift and go to state 36 ]
+  ! TT_sub          [ shift and go to state 37 ]
+  ! TT_mul          [ shift and go to state 38 ]
+  ! TT_div          [ shift and go to state 39 ]
+  ! TT_pow          [ shift and go to state 40 ]
+  ! TT_dequ         [ shift and go to state 41 ]
+  ! TT_less         [ shift and go to state 42 ]
+  ! TT_greater      [ shift and go to state 43 ]
+  ! TT_leq          [ shift and go to state 44 ]
+  ! TT_geq          [ shift and go to state 45 ]
+
+
+state 65
+
+    (26) expression -> expression TT_greater expression .
+    (19) expression -> expression . TT_plus expression
+    (20) expression -> expression . TT_sub expression
+    (21) expression -> expression . TT_mul expression
+    (22) expression -> expression . TT_div expression
+    (23) expression -> expression . TT_pow expression
+    (24) expression -> expression . TT_dequ expression
+    (25) expression -> expression . TT_less expression
+    (26) expression -> expression . TT_greater expression
+    (27) expression -> expression . TT_leq expression
+    (28) expression -> expression . TT_geq expression
+
+    TT_colon        reduce using rule 26 (expression -> expression TT_greater expression .)
+    TT_plus         reduce using rule 26 (expression -> expression TT_greater expression .)
+    TT_sub          reduce using rule 26 (expression -> expression TT_greater expression .)
+    TT_mul          reduce using rule 26 (expression -> expression TT_greater expression .)
+    TT_div          reduce using rule 26 (expression -> expression TT_greater expression .)
+    TT_pow          reduce using rule 26 (expression -> expression TT_greater expression .)
+    TT_dequ         reduce using rule 26 (expression -> expression TT_greater expression .)
+    TT_less         reduce using rule 26 (expression -> expression TT_greater expression .)
+    TT_greater      reduce using rule 26 (expression -> expression TT_greater expression .)
+    TT_leq          reduce using rule 26 (expression -> expression TT_greater expression .)
+    TT_geq          reduce using rule 26 (expression -> expression TT_greater expression .)
+    TT_identifier   reduce using rule 26 (expression -> expression TT_greater expression .)
+    TT_print        reduce using rule 26 (expression -> expression TT_greater expression .)
+    TT_if           reduce using rule 26 (expression -> expression TT_greater expression .)
+    TT_while        reduce using rule 26 (expression -> expression TT_greater expression .)
+    TT_for          reduce using rule 26 (expression -> expression TT_greater expression .)
+    $end            reduce using rule 26 (expression -> expression TT_greater expression .)
+    TT_elif         reduce using rule 26 (expression -> expression TT_greater expression .)
+    TT_else         reduce using rule 26 (expression -> expression TT_greater expression .)
+    TT_rparen       reduce using rule 26 (expression -> expression TT_greater expression .)
+    TT_rbracket     reduce using rule 26 (expression -> expression TT_greater expression .)
+    TT_comma        reduce using rule 26 (expression -> expression TT_greater expression .)
+
+  ! TT_plus         [ shift and go to state 36 ]
+  ! TT_sub          [ shift and go to state 37 ]
+  ! TT_mul          [ shift and go to state 38 ]
+  ! TT_div          [ shift and go to state 39 ]
+  ! TT_pow          [ shift and go to state 40 ]
+  ! TT_dequ         [ shift and go to state 41 ]
+  ! TT_less         [ shift and go to state 42 ]
+  ! TT_greater      [ shift and go to state 43 ]
+  ! TT_leq          [ shift and go to state 44 ]
+  ! TT_geq          [ shift and go to state 45 ]
+
+
+state 66
+
+    (27) expression -> expression TT_leq expression .
+    (19) expression -> expression . TT_plus expression
+    (20) expression -> expression . TT_sub expression
+    (21) expression -> expression . TT_mul expression
+    (22) expression -> expression . TT_div expression
+    (23) expression -> expression . TT_pow expression
+    (24) expression -> expression . TT_dequ expression
+    (25) expression -> expression . TT_less expression
+    (26) expression -> expression . TT_greater expression
+    (27) expression -> expression . TT_leq expression
+    (28) expression -> expression . TT_geq expression
+
+    TT_colon        reduce using rule 27 (expression -> expression TT_leq expression .)
+    TT_plus         reduce using rule 27 (expression -> expression TT_leq expression .)
+    TT_sub          reduce using rule 27 (expression -> expression TT_leq expression .)
+    TT_mul          reduce using rule 27 (expression -> expression TT_leq expression .)
+    TT_div          reduce using rule 27 (expression -> expression TT_leq expression .)
+    TT_pow          reduce using rule 27 (expression -> expression TT_leq expression .)
+    TT_dequ         reduce using rule 27 (expression -> expression TT_leq expression .)
+    TT_less         reduce using rule 27 (expression -> expression TT_leq expression .)
+    TT_greater      reduce using rule 27 (expression -> expression TT_leq expression .)
+    TT_leq          reduce using rule 27 (expression -> expression TT_leq expression .)
+    TT_geq          reduce using rule 27 (expression -> expression TT_leq expression .)
+    TT_identifier   reduce using rule 27 (expression -> expression TT_leq expression .)
+    TT_print        reduce using rule 27 (expression -> expression TT_leq expression .)
+    TT_if           reduce using rule 27 (expression -> expression TT_leq expression .)
+    TT_while        reduce using rule 27 (expression -> expression TT_leq expression .)
+    TT_for          reduce using rule 27 (expression -> expression TT_leq expression .)
+    $end            reduce using rule 27 (expression -> expression TT_leq expression .)
+    TT_elif         reduce using rule 27 (expression -> expression TT_leq expression .)
+    TT_else         reduce using rule 27 (expression -> expression TT_leq expression .)
+    TT_rparen       reduce using rule 27 (expression -> expression TT_leq expression .)
+    TT_rbracket     reduce using rule 27 (expression -> expression TT_leq expression .)
+    TT_comma        reduce using rule 27 (expression -> expression TT_leq expression .)
+
+  ! TT_plus         [ shift and go to state 36 ]
+  ! TT_sub          [ shift and go to state 37 ]
+  ! TT_mul          [ shift and go to state 38 ]
+  ! TT_div          [ shift and go to state 39 ]
+  ! TT_pow          [ shift and go to state 40 ]
+  ! TT_dequ         [ shift and go to state 41 ]
+  ! TT_less         [ shift and go to state 42 ]
+  ! TT_greater      [ shift and go to state 43 ]
+  ! TT_leq          [ shift and go to state 44 ]
+  ! TT_geq          [ shift and go to state 45 ]
+
+
+state 67
+
+    (28) expression -> expression TT_geq expression .
+    (19) expression -> expression . TT_plus expression
+    (20) expression -> expression . TT_sub expression
+    (21) expression -> expression . TT_mul expression
+    (22) expression -> expression . TT_div expression
+    (23) expression -> expression . TT_pow expression
+    (24) expression -> expression . TT_dequ expression
+    (25) expression -> expression . TT_less expression
+    (26) expression -> expression . TT_greater expression
+    (27) expression -> expression . TT_leq expression
+    (28) expression -> expression . TT_geq expression
+
+    TT_colon        reduce using rule 28 (expression -> expression TT_geq expression .)
+    TT_plus         reduce using rule 28 (expression -> expression TT_geq expression .)
+    TT_sub          reduce using rule 28 (expression -> expression TT_geq expression .)
+    TT_mul          reduce using rule 28 (expression -> expression TT_geq expression .)
+    TT_div          reduce using rule 28 (expression -> expression TT_geq expression .)
+    TT_pow          reduce using rule 28 (expression -> expression TT_geq expression .)
+    TT_dequ         reduce using rule 28 (expression -> expression TT_geq expression .)
+    TT_less         reduce using rule 28 (expression -> expression TT_geq expression .)
+    TT_greater      reduce using rule 28 (expression -> expression TT_geq expression .)
+    TT_leq          reduce using rule 28 (expression -> expression TT_geq expression .)
+    TT_geq          reduce using rule 28 (expression -> expression TT_geq expression .)
+    TT_identifier   reduce using rule 28 (expression -> expression TT_geq expression .)
+    TT_print        reduce using rule 28 (expression -> expression TT_geq expression .)
+    TT_if           reduce using rule 28 (expression -> expression TT_geq expression .)
+    TT_while        reduce using rule 28 (expression -> expression TT_geq expression .)
+    TT_for          reduce using rule 28 (expression -> expression TT_geq expression .)
+    $end            reduce using rule 28 (expression -> expression TT_geq expression .)
+    TT_elif         reduce using rule 28 (expression -> expression TT_geq expression .)
+    TT_else         reduce using rule 28 (expression -> expression TT_geq expression .)
+    TT_rparen       reduce using rule 28 (expression -> expression TT_geq expression .)
+    TT_rbracket     reduce using rule 28 (expression -> expression TT_geq expression .)
+    TT_comma        reduce using rule 28 (expression -> expression TT_geq expression .)
+
+  ! TT_plus         [ shift and go to state 36 ]
+  ! TT_sub          [ shift and go to state 37 ]
+  ! TT_mul          [ shift and go to state 38 ]
+  ! TT_div          [ shift and go to state 39 ]
+  ! TT_pow          [ shift and go to state 40 ]
+  ! TT_dequ         [ shift and go to state 41 ]
+  ! TT_less         [ shift and go to state 42 ]
+  ! TT_greater      [ shift and go to state 43 ]
+  ! TT_leq          [ shift and go to state 44 ]
+  ! TT_geq          [ shift and go to state 45 ]
+
+
+state 68
+
+    (36) array_access -> TT_identifier TT_lbracket expression . TT_rbracket
+    (19) expression -> expression . TT_plus expression
+    (20) expression -> expression . TT_sub expression
+    (21) expression -> expression . TT_mul expression
+    (22) expression -> expression . TT_div expression
+    (23) expression -> expression . TT_pow expression
+    (24) expression -> expression . TT_dequ expression
+    (25) expression -> expression . TT_less expression
+    (26) expression -> expression . TT_greater expression
+    (27) expression -> expression . TT_leq expression
+    (28) expression -> expression . TT_geq expression
+
+    TT_rbracket     shift and go to state 75
+    TT_plus         shift and go to state 36
+    TT_sub          shift and go to state 37
+    TT_mul          shift and go to state 38
+    TT_div          shift and go to state 39
+    TT_pow          shift and go to state 40
+    TT_dequ         shift and go to state 41
+    TT_less         shift and go to state 42
+    TT_greater      shift and go to state 43
+    TT_leq          shift and go to state 44
+    TT_geq          shift and go to state 45
+
+
+state 69
+
+    (35) array -> TT_lbracket elements TT_rbracket .
+
+    TT_colon        reduce using rule 35 (array -> TT_lbracket elements TT_rbracket .)
+    TT_plus         reduce using rule 35 (array -> TT_lbracket elements TT_rbracket .)
+    TT_sub          reduce using rule 35 (array -> TT_lbracket elements TT_rbracket .)
+    TT_mul          reduce using rule 35 (array -> TT_lbracket elements TT_rbracket .)
+    TT_div          reduce using rule 35 (array -> TT_lbracket elements TT_rbracket .)
+    TT_pow          reduce using rule 35 (array -> TT_lbracket elements TT_rbracket .)
+    TT_dequ         reduce using rule 35 (array -> TT_lbracket elements TT_rbracket .)
+    TT_less         reduce using rule 35 (array -> TT_lbracket elements TT_rbracket .)
+    TT_greater      reduce using rule 35 (array -> TT_lbracket elements TT_rbracket .)
+    TT_leq          reduce using rule 35 (array -> TT_lbracket elements TT_rbracket .)
+    TT_geq          reduce using rule 35 (array -> TT_lbracket elements TT_rbracket .)
+    TT_identifier   reduce using rule 35 (array -> TT_lbracket elements TT_rbracket .)
+    TT_print        reduce using rule 35 (array -> TT_lbracket elements TT_rbracket .)
+    TT_if           reduce using rule 35 (array -> TT_lbracket elements TT_rbracket .)
+    TT_while        reduce using rule 35 (array -> TT_lbracket elements TT_rbracket .)
+    TT_for          reduce using rule 35 (array -> TT_lbracket elements TT_rbracket .)
+    $end            reduce using rule 35 (array -> TT_lbracket elements TT_rbracket .)
+    TT_elif         reduce using rule 35 (array -> TT_lbracket elements TT_rbracket .)
+    TT_else         reduce using rule 35 (array -> TT_lbracket elements TT_rbracket .)
+    TT_rparen       reduce using rule 35 (array -> TT_lbracket elements TT_rbracket .)
+    TT_rbracket     reduce using rule 35 (array -> TT_lbracket elements TT_rbracket .)
+    TT_comma        reduce using rule 35 (array -> TT_lbracket elements TT_rbracket .)
+
+
+state 70
+
+    (37) elements -> elements TT_comma . expression
+    (19) expression -> . expression TT_plus expression
+    (20) expression -> . expression TT_sub expression
+    (21) expression -> . expression TT_mul expression
+    (22) expression -> . expression TT_div expression
+    (23) expression -> . expression TT_pow expression
+    (24) expression -> . expression TT_dequ expression
+    (25) expression -> . expression TT_less expression
+    (26) expression -> . expression TT_greater expression
+    (27) expression -> . expression TT_leq expression
+    (28) expression -> . expression TT_geq expression
+    (29) expression -> . array_access
+    (30) expression -> . TT_int
+    (31) expression -> . TT_string
+    (32) expression -> . TT_float
+    (33) expression -> . TT_identifier
+    (34) expression -> . array
+    (36) array_access -> . TT_identifier TT_lbracket expression TT_rbracket
+    (35) array -> . TT_lbracket elements TT_rbracket
+
+    TT_int          shift and go to state 19
+    TT_string       shift and go to state 20
+    TT_float        shift and go to state 21
+    TT_identifier   shift and go to state 22
+    TT_lbracket     shift and go to state 24
+
+    expression                     shift and go to state 76
+    array_access                   shift and go to state 18
+    array                          shift and go to state 23
+
+state 71
+
+    (17) while_loop -> TT_while expression TT_colon statement_list .
+    (2) statement_list -> statement_list . statement
+    (4) statement -> . assignment
+    (5) statement -> . print_statement
+    (6) statement -> . if_statement
+    (7) statement -> . while_loop
+    (8) statement -> . for_loop
+    (9) assignment -> . TT_identifier TT_equ expression
+    (10) assignment -> . TT_identifier TT_equ TT_float
+    (11) assignment -> . TT_identifier TT_equ TT_int
+    (40) print_statement -> . TT_print TT_lparen expression TT_rparen
+    (41) print_statement -> . TT_print TT_lparen TT_string TT_rparen
+    (42) print_statement -> . TT_print TT_lparen TT_float TT_rparen
+    (43) print_statement -> . TT_print TT_lparen TT_int TT_rparen
+    (44) print_statement -> . TT_print TT_lparen TT_identifier TT_rparen
+    (12) if_statement -> . TT_if expression TT_colon statement_list elif_clauses else_clause
+    (17) while_loop -> . TT_while expression TT_colon statement_list
+    (18) for_loop -> . TT_for TT_identifier TT_in expression TT_colon statement_list
+
+  ! shift/reduce conflict for TT_identifier resolved as shift
+  ! shift/reduce conflict for TT_print resolved as shift
+  ! shift/reduce conflict for TT_if resolved as shift
+  ! shift/reduce conflict for TT_while resolved as shift
+  ! shift/reduce conflict for TT_for resolved as shift
+    $end            reduce using rule 17 (while_loop -> TT_while expression TT_colon statement_list .)
+    TT_elif         reduce using rule 17 (while_loop -> TT_while expression TT_colon statement_list .)
+    TT_else         reduce using rule 17 (while_loop -> TT_while expression TT_colon statement_list .)
+    TT_identifier   shift and go to state 9
+    TT_print        shift and go to state 10
+    TT_if           shift and go to state 11
+    TT_while        shift and go to state 12
+    TT_for          shift and go to state 13
+
+  ! TT_identifier   [ reduce using rule 17 (while_loop -> TT_while expression TT_colon statement_list .) ]
+  ! TT_print        [ reduce using rule 17 (while_loop -> TT_while expression TT_colon statement_list .) ]
+  ! TT_if           [ reduce using rule 17 (while_loop -> TT_while expression TT_colon statement_list .) ]
+  ! TT_while        [ reduce using rule 17 (while_loop -> TT_while expression TT_colon statement_list .) ]
+  ! TT_for          [ reduce using rule 17 (while_loop -> TT_while expression TT_colon statement_list .) ]
+
+    statement                      shift and go to state 14
+    assignment                     shift and go to state 4
+    print_statement                shift and go to state 5
+    if_statement                   shift and go to state 6
+    while_loop                     shift and go to state 7
+    for_loop                       shift and go to state 8
+
+state 72
+
+    (18) for_loop -> TT_for TT_identifier TT_in expression . TT_colon statement_list
+    (19) expression -> expression . TT_plus expression
+    (20) expression -> expression . TT_sub expression
+    (21) expression -> expression . TT_mul expression
+    (22) expression -> expression . TT_div expression
+    (23) expression -> expression . TT_pow expression
+    (24) expression -> expression . TT_dequ expression
+    (25) expression -> expression . TT_less expression
+    (26) expression -> expression . TT_greater expression
+    (27) expression -> expression . TT_leq expression
+    (28) expression -> expression . TT_geq expression
+
+    TT_colon        shift and go to state 77
+    TT_plus         shift and go to state 36
+    TT_sub          shift and go to state 37
+    TT_mul          shift and go to state 38
+    TT_div          shift and go to state 39
+    TT_pow          shift and go to state 40
+    TT_dequ         shift and go to state 41
+    TT_less         shift and go to state 42
+    TT_greater      shift and go to state 43
+    TT_leq          shift and go to state 44
+    TT_geq          shift and go to state 45
+
+
+state 73
+
+    (12) if_statement -> TT_if expression TT_colon statement_list elif_clauses . else_clause
+    (13) elif_clauses -> elif_clauses . TT_elif expression TT_colon statement_list
+    (15) else_clause -> . TT_else TT_colon statement_list
+    (16) else_clause -> . empty
+    (45) empty -> .
+
+  ! shift/reduce conflict for TT_elif resolved as shift
+  ! shift/reduce conflict for TT_else resolved as shift
+    TT_elif         shift and go to state 79
+    TT_else         shift and go to state 80
+    TT_identifier   reduce using rule 45 (empty -> .)
+    TT_print        reduce using rule 45 (empty -> .)
+    TT_if           reduce using rule 45 (empty -> .)
+    TT_while        reduce using rule 45 (empty -> .)
+    TT_for          reduce using rule 45 (empty -> .)
+    $end            reduce using rule 45 (empty -> .)
+
+  ! TT_elif         [ reduce using rule 45 (empty -> .) ]
+  ! TT_else         [ reduce using rule 45 (empty -> .) ]
+
+    else_clause                    shift and go to state 78
+    empty                          shift and go to state 81
+
+state 74
+
+    (14) elif_clauses -> empty .
+
+    TT_identifier   reduce using rule 14 (elif_clauses -> empty .)
+    TT_print        reduce using rule 14 (elif_clauses -> empty .)
+    TT_if           reduce using rule 14 (elif_clauses -> empty .)
+    TT_while        reduce using rule 14 (elif_clauses -> empty .)
+    TT_for          reduce using rule 14 (elif_clauses -> empty .)
+    TT_elif         reduce using rule 14 (elif_clauses -> empty .)
+    TT_else         reduce using rule 14 (elif_clauses -> empty .)
+    $end            reduce using rule 14 (elif_clauses -> empty .)
+
+
+state 75
+
+    (36) array_access -> TT_identifier TT_lbracket expression TT_rbracket .
+
+    TT_colon        reduce using rule 36 (array_access -> TT_identifier TT_lbracket expression TT_rbracket .)
+    TT_plus         reduce using rule 36 (array_access -> TT_identifier TT_lbracket expression TT_rbracket .)
+    TT_sub          reduce using rule 36 (array_access -> TT_identifier TT_lbracket expression TT_rbracket .)
+    TT_mul          reduce using rule 36 (array_access -> TT_identifier TT_lbracket expression TT_rbracket .)
+    TT_div          reduce using rule 36 (array_access -> TT_identifier TT_lbracket expression TT_rbracket .)
+    TT_pow          reduce using rule 36 (array_access -> TT_identifier TT_lbracket expression TT_rbracket .)
+    TT_dequ         reduce using rule 36 (array_access -> TT_identifier TT_lbracket expression TT_rbracket .)
+    TT_less         reduce using rule 36 (array_access -> TT_identifier TT_lbracket expression TT_rbracket .)
+    TT_greater      reduce using rule 36 (array_access -> TT_identifier TT_lbracket expression TT_rbracket .)
+    TT_leq          reduce using rule 36 (array_access -> TT_identifier TT_lbracket expression TT_rbracket .)
+    TT_geq          reduce using rule 36 (array_access -> TT_identifier TT_lbracket expression TT_rbracket .)
+    TT_identifier   reduce using rule 36 (array_access -> TT_identifier TT_lbracket expression TT_rbracket .)
+    TT_print        reduce using rule 36 (array_access -> TT_identifier TT_lbracket expression TT_rbracket .)
+    TT_if           reduce using rule 36 (array_access -> TT_identifier TT_lbracket expression TT_rbracket .)
+    TT_while        reduce using rule 36 (array_access -> TT_identifier TT_lbracket expression TT_rbracket .)
+    TT_for          reduce using rule 36 (array_access -> TT_identifier TT_lbracket expression TT_rbracket .)
+    $end            reduce using rule 36 (array_access -> TT_identifier TT_lbracket expression TT_rbracket .)
+    TT_elif         reduce using rule 36 (array_access -> TT_identifier TT_lbracket expression TT_rbracket .)
+    TT_else         reduce using rule 36 (array_access -> TT_identifier TT_lbracket expression TT_rbracket .)
+    TT_rparen       reduce using rule 36 (array_access -> TT_identifier TT_lbracket expression TT_rbracket .)
+    TT_rbracket     reduce using rule 36 (array_access -> TT_identifier TT_lbracket expression TT_rbracket .)
+    TT_comma        reduce using rule 36 (array_access -> TT_identifier TT_lbracket expression TT_rbracket .)
+
+
+state 76
+
+    (37) elements -> elements TT_comma expression .
+    (19) expression -> expression . TT_plus expression
+    (20) expression -> expression . TT_sub expression
+    (21) expression -> expression . TT_mul expression
+    (22) expression -> expression . TT_div expression
+    (23) expression -> expression . TT_pow expression
+    (24) expression -> expression . TT_dequ expression
+    (25) expression -> expression . TT_less expression
+    (26) expression -> expression . TT_greater expression
+    (27) expression -> expression . TT_leq expression
+    (28) expression -> expression . TT_geq expression
+
+    TT_rbracket     reduce using rule 37 (elements -> elements TT_comma expression .)
+    TT_comma        reduce using rule 37 (elements -> elements TT_comma expression .)
+    TT_plus         shift and go to state 36
+    TT_sub          shift and go to state 37
+    TT_mul          shift and go to state 38
+    TT_div          shift and go to state 39
+    TT_pow          shift and go to state 40
+    TT_dequ         shift and go to state 41
+    TT_less         shift and go to state 42
+    TT_greater      shift and go to state 43
+    TT_leq          shift and go to state 44
+    TT_geq          shift and go to state 45
+
+
+state 77
+
+    (18) for_loop -> TT_for TT_identifier TT_in expression TT_colon . statement_list
+    (2) statement_list -> . statement_list statement
+    (3) statement_list -> . statement
+    (4) statement -> . assignment
+    (5) statement -> . print_statement
+    (6) statement -> . if_statement
+    (7) statement -> . while_loop
+    (8) statement -> . for_loop
+    (9) assignment -> . TT_identifier TT_equ expression
+    (10) assignment -> . TT_identifier TT_equ TT_float
+    (11) assignment -> . TT_identifier TT_equ TT_int
+    (40) print_statement -> . TT_print TT_lparen expression TT_rparen
+    (41) print_statement -> . TT_print TT_lparen TT_string TT_rparen
+    (42) print_statement -> . TT_print TT_lparen TT_float TT_rparen
+    (43) print_statement -> . TT_print TT_lparen TT_int TT_rparen
+    (44) print_statement -> . TT_print TT_lparen TT_identifier TT_rparen
+    (12) if_statement -> . TT_if expression TT_colon statement_list elif_clauses else_clause
+    (17) while_loop -> . TT_while expression TT_colon statement_list
+    (18) for_loop -> . TT_for TT_identifier TT_in expression TT_colon statement_list
+
+    TT_identifier   shift and go to state 9
+    TT_print        shift and go to state 10
+    TT_if           shift and go to state 11
+    TT_while        shift and go to state 12
+    TT_for          shift and go to state 13
+
+    statement_list                 shift and go to state 82
+    statement                      shift and go to state 3
+    assignment                     shift and go to state 4
+    print_statement                shift and go to state 5
+    if_statement                   shift and go to state 6
+    while_loop                     shift and go to state 7
+    for_loop                       shift and go to state 8
+
+state 78
+
+    (12) if_statement -> TT_if expression TT_colon statement_list elif_clauses else_clause .
+
+    TT_identifier   reduce using rule 12 (if_statement -> TT_if expression TT_colon statement_list elif_clauses else_clause .)
+    TT_print        reduce using rule 12 (if_statement -> TT_if expression TT_colon statement_list elif_clauses else_clause .)
+    TT_if           reduce using rule 12 (if_statement -> TT_if expression TT_colon statement_list elif_clauses else_clause .)
+    TT_while        reduce using rule 12 (if_statement -> TT_if expression TT_colon statement_list elif_clauses else_clause .)
+    TT_for          reduce using rule 12 (if_statement -> TT_if expression TT_colon statement_list elif_clauses else_clause .)
+    $end            reduce using rule 12 (if_statement -> TT_if expression TT_colon statement_list elif_clauses else_clause .)
+    TT_elif         reduce using rule 12 (if_statement -> TT_if expression TT_colon statement_list elif_clauses else_clause .)
+    TT_else         reduce using rule 12 (if_statement -> TT_if expression TT_colon statement_list elif_clauses else_clause .)
+
+
+state 79
+
+    (13) elif_clauses -> elif_clauses TT_elif . expression TT_colon statement_list
+    (19) expression -> . expression TT_plus expression
+    (20) expression -> . expression TT_sub expression
+    (21) expression -> . expression TT_mul expression
+    (22) expression -> . expression TT_div expression
+    (23) expression -> . expression TT_pow expression
+    (24) expression -> . expression TT_dequ expression
+    (25) expression -> . expression TT_less expression
+    (26) expression -> . expression TT_greater expression
+    (27) expression -> . expression TT_leq expression
+    (28) expression -> . expression TT_geq expression
+    (29) expression -> . array_access
+    (30) expression -> . TT_int
+    (31) expression -> . TT_string
+    (32) expression -> . TT_float
+    (33) expression -> . TT_identifier
+    (34) expression -> . array
+    (36) array_access -> . TT_identifier TT_lbracket expression TT_rbracket
+    (35) array -> . TT_lbracket elements TT_rbracket
+
+    TT_int          shift and go to state 19
+    TT_string       shift and go to state 20
+    TT_float        shift and go to state 21
+    TT_identifier   shift and go to state 22
+    TT_lbracket     shift and go to state 24
+
+    expression                     shift and go to state 83
+    array_access                   shift and go to state 18
+    array                          shift and go to state 23
+
+state 80
+
+    (15) else_clause -> TT_else . TT_colon statement_list
+
+    TT_colon        shift and go to state 84
+
+
+state 81
+
+    (16) else_clause -> empty .
+
+    TT_identifier   reduce using rule 16 (else_clause -> empty .)
+    TT_print        reduce using rule 16 (else_clause -> empty .)
+    TT_if           reduce using rule 16 (else_clause -> empty .)
+    TT_while        reduce using rule 16 (else_clause -> empty .)
+    TT_for          reduce using rule 16 (else_clause -> empty .)
+    TT_elif         reduce using rule 16 (else_clause -> empty .)
+    TT_else         reduce using rule 16 (else_clause -> empty .)
+    $end            reduce using rule 16 (else_clause -> empty .)
+
+
+state 82
+
+    (18) for_loop -> TT_for TT_identifier TT_in expression TT_colon statement_list .
+    (2) statement_list -> statement_list . statement
+    (4) statement -> . assignment
+    (5) statement -> . print_statement
+    (6) statement -> . if_statement
+    (7) statement -> . while_loop
+    (8) statement -> . for_loop
+    (9) assignment -> . TT_identifier TT_equ expression
+    (10) assignment -> . TT_identifier TT_equ TT_float
+    (11) assignment -> . TT_identifier TT_equ TT_int
+    (40) print_statement -> . TT_print TT_lparen expression TT_rparen
+    (41) print_statement -> . TT_print TT_lparen TT_string TT_rparen
+    (42) print_statement -> . TT_print TT_lparen TT_float TT_rparen
+    (43) print_statement -> . TT_print TT_lparen TT_int TT_rparen
+    (44) print_statement -> . TT_print TT_lparen TT_identifier TT_rparen
+    (12) if_statement -> . TT_if expression TT_colon statement_list elif_clauses else_clause
+    (17) while_loop -> . TT_while expression TT_colon statement_list
+    (18) for_loop -> . TT_for TT_identifier TT_in expression TT_colon statement_list
+
+  ! shift/reduce conflict for TT_identifier resolved as shift
+  ! shift/reduce conflict for TT_print resolved as shift
+  ! shift/reduce conflict for TT_if resolved as shift
+  ! shift/reduce conflict for TT_while resolved as shift
+  ! shift/reduce conflict for TT_for resolved as shift
+    $end            reduce using rule 18 (for_loop -> TT_for TT_identifier TT_in expression TT_colon statement_list .)
+    TT_elif         reduce using rule 18 (for_loop -> TT_for TT_identifier TT_in expression TT_colon statement_list .)
+    TT_else         reduce using rule 18 (for_loop -> TT_for TT_identifier TT_in expression TT_colon statement_list .)
+    TT_identifier   shift and go to state 9
+    TT_print        shift and go to state 10
+    TT_if           shift and go to state 11
+    TT_while        shift and go to state 12
+    TT_for          shift and go to state 13
+
+  ! TT_identifier   [ reduce using rule 18 (for_loop -> TT_for TT_identifier TT_in expression TT_colon statement_list .) ]
+  ! TT_print        [ reduce using rule 18 (for_loop -> TT_for TT_identifier TT_in expression TT_colon statement_list .) ]
+  ! TT_if           [ reduce using rule 18 (for_loop -> TT_for TT_identifier TT_in expression TT_colon statement_list .) ]
+  ! TT_while        [ reduce using rule 18 (for_loop -> TT_for TT_identifier TT_in expression TT_colon statement_list .) ]
+  ! TT_for          [ reduce using rule 18 (for_loop -> TT_for TT_identifier TT_in expression TT_colon statement_list .) ]
+
+    statement                      shift and go to state 14
+    assignment                     shift and go to state 4
+    print_statement                shift and go to state 5
+    if_statement                   shift and go to state 6
+    while_loop                     shift and go to state 7
+    for_loop                       shift and go to state 8
+
+state 83
+
+    (13) elif_clauses -> elif_clauses TT_elif expression . TT_colon statement_list
+    (19) expression -> expression . TT_plus expression
+    (20) expression -> expression . TT_sub expression
+    (21) expression -> expression . TT_mul expression
+    (22) expression -> expression . TT_div expression
+    (23) expression -> expression . TT_pow expression
+    (24) expression -> expression . TT_dequ expression
+    (25) expression -> expression . TT_less expression
+    (26) expression -> expression . TT_greater expression
+    (27) expression -> expression . TT_leq expression
+    (28) expression -> expression . TT_geq expression
+
+    TT_colon        shift and go to state 85
+    TT_plus         shift and go to state 36
+    TT_sub          shift and go to state 37
+    TT_mul          shift and go to state 38
+    TT_div          shift and go to state 39
+    TT_pow          shift and go to state 40
+    TT_dequ         shift and go to state 41
+    TT_less         shift and go to state 42
+    TT_greater      shift and go to state 43
+    TT_leq          shift and go to state 44
+    TT_geq          shift and go to state 45
+
+
+state 84
+
+    (15) else_clause -> TT_else TT_colon . statement_list
+    (2) statement_list -> . statement_list statement
+    (3) statement_list -> . statement
+    (4) statement -> . assignment
+    (5) statement -> . print_statement
+    (6) statement -> . if_statement
+    (7) statement -> . while_loop
+    (8) statement -> . for_loop
+    (9) assignment -> . TT_identifier TT_equ expression
+    (10) assignment -> . TT_identifier TT_equ TT_float
+    (11) assignment -> . TT_identifier TT_equ TT_int
+    (40) print_statement -> . TT_print TT_lparen expression TT_rparen
+    (41) print_statement -> . TT_print TT_lparen TT_string TT_rparen
+    (42) print_statement -> . TT_print TT_lparen TT_float TT_rparen
+    (43) print_statement -> . TT_print TT_lparen TT_int TT_rparen
+    (44) print_statement -> . TT_print TT_lparen TT_identifier TT_rparen
+    (12) if_statement -> . TT_if expression TT_colon statement_list elif_clauses else_clause
+    (17) while_loop -> . TT_while expression TT_colon statement_list
+    (18) for_loop -> . TT_for TT_identifier TT_in expression TT_colon statement_list
+
+    TT_identifier   shift and go to state 9
+    TT_print        shift and go to state 10
+    TT_if           shift and go to state 11
+    TT_while        shift and go to state 12
+    TT_for          shift and go to state 13
+
+    statement_list                 shift and go to state 86
+    statement                      shift and go to state 3
+    assignment                     shift and go to state 4
+    print_statement                shift and go to state 5
+    if_statement                   shift and go to state 6
+    while_loop                     shift and go to state 7
+    for_loop                       shift and go to state 8
+
+state 85
+
+    (13) elif_clauses -> elif_clauses TT_elif expression TT_colon . statement_list
+    (2) statement_list -> . statement_list statement
+    (3) statement_list -> . statement
+    (4) statement -> . assignment
+    (5) statement -> . print_statement
+    (6) statement -> . if_statement
+    (7) statement -> . while_loop
+    (8) statement -> . for_loop
+    (9) assignment -> . TT_identifier TT_equ expression
+    (10) assignment -> . TT_identifier TT_equ TT_float
+    (11) assignment -> . TT_identifier TT_equ TT_int
+    (40) print_statement -> . TT_print TT_lparen expression TT_rparen
+    (41) print_statement -> . TT_print TT_lparen TT_string TT_rparen
+    (42) print_statement -> . TT_print TT_lparen TT_float TT_rparen
+    (43) print_statement -> . TT_print TT_lparen TT_int TT_rparen
+    (44) print_statement -> . TT_print TT_lparen TT_identifier TT_rparen
+    (12) if_statement -> . TT_if expression TT_colon statement_list elif_clauses else_clause
+    (17) while_loop -> . TT_while expression TT_colon statement_list
+    (18) for_loop -> . TT_for TT_identifier TT_in expression TT_colon statement_list
+
+    TT_identifier   shift and go to state 9
+    TT_print        shift and go to state 10
+    TT_if           shift and go to state 11
+    TT_while        shift and go to state 12
+    TT_for          shift and go to state 13
+
+    statement_list                 shift and go to state 87
+    statement                      shift and go to state 3
+    assignment                     shift and go to state 4
+    print_statement                shift and go to state 5
+    if_statement                   shift and go to state 6
+    while_loop                     shift and go to state 7
+    for_loop                       shift and go to state 8
+
+state 86
+
+    (15) else_clause -> TT_else TT_colon statement_list .
+    (2) statement_list -> statement_list . statement
+    (4) statement -> . assignment
+    (5) statement -> . print_statement
+    (6) statement -> . if_statement
+    (7) statement -> . while_loop
+    (8) statement -> . for_loop
+    (9) assignment -> . TT_identifier TT_equ expression
+    (10) assignment -> . TT_identifier TT_equ TT_float
+    (11) assignment -> . TT_identifier TT_equ TT_int
+    (40) print_statement -> . TT_print TT_lparen expression TT_rparen
+    (41) print_statement -> . TT_print TT_lparen TT_string TT_rparen
+    (42) print_statement -> . TT_print TT_lparen TT_float TT_rparen
+    (43) print_statement -> . TT_print TT_lparen TT_int TT_rparen
+    (44) print_statement -> . TT_print TT_lparen TT_identifier TT_rparen
+    (12) if_statement -> . TT_if expression TT_colon statement_list elif_clauses else_clause
+    (17) while_loop -> . TT_while expression TT_colon statement_list
+    (18) for_loop -> . TT_for TT_identifier TT_in expression TT_colon statement_list
+
+  ! shift/reduce conflict for TT_identifier resolved as shift
+  ! shift/reduce conflict for TT_print resolved as shift
+  ! shift/reduce conflict for TT_if resolved as shift
+  ! shift/reduce conflict for TT_while resolved as shift
+  ! shift/reduce conflict for TT_for resolved as shift
+    TT_elif         reduce using rule 15 (else_clause -> TT_else TT_colon statement_list .)
+    TT_else         reduce using rule 15 (else_clause -> TT_else TT_colon statement_list .)
+    $end            reduce using rule 15 (else_clause -> TT_else TT_colon statement_list .)
+    TT_identifier   shift and go to state 9
+    TT_print        shift and go to state 10
+    TT_if           shift and go to state 11
+    TT_while        shift and go to state 12
+    TT_for          shift and go to state 13
+
+  ! TT_identifier   [ reduce using rule 15 (else_clause -> TT_else TT_colon statement_list .) ]
+  ! TT_print        [ reduce using rule 15 (else_clause -> TT_else TT_colon statement_list .) ]
+  ! TT_if           [ reduce using rule 15 (else_clause -> TT_else TT_colon statement_list .) ]
+  ! TT_while        [ reduce using rule 15 (else_clause -> TT_else TT_colon statement_list .) ]
+  ! TT_for          [ reduce using rule 15 (else_clause -> TT_else TT_colon statement_list .) ]
+
+    statement                      shift and go to state 14
+    assignment                     shift and go to state 4
+    print_statement                shift and go to state 5
+    if_statement                   shift and go to state 6
+    while_loop                     shift and go to state 7
+    for_loop                       shift and go to state 8
+
+state 87
+
+    (13) elif_clauses -> elif_clauses TT_elif expression TT_colon statement_list .
+    (2) statement_list -> statement_list . statement
+    (4) statement -> . assignment
+    (5) statement -> . print_statement
+    (6) statement -> . if_statement
+    (7) statement -> . while_loop
+    (8) statement -> . for_loop
+    (9) assignment -> . TT_identifier TT_equ expression
+    (10) assignment -> . TT_identifier TT_equ TT_float
+    (11) assignment -> . TT_identifier TT_equ TT_int
+    (40) print_statement -> . TT_print TT_lparen expression TT_rparen
+    (41) print_statement -> . TT_print TT_lparen TT_string TT_rparen
+    (42) print_statement -> . TT_print TT_lparen TT_float TT_rparen
+    (43) print_statement -> . TT_print TT_lparen TT_int TT_rparen
+    (44) print_statement -> . TT_print TT_lparen TT_identifier TT_rparen
+    (12) if_statement -> . TT_if expression TT_colon statement_list elif_clauses else_clause
+    (17) while_loop -> . TT_while expression TT_colon statement_list
+    (18) for_loop -> . TT_for TT_identifier TT_in expression TT_colon statement_list
+
+  ! shift/reduce conflict for TT_identifier resolved as shift
+  ! shift/reduce conflict for TT_print resolved as shift
+  ! shift/reduce conflict for TT_if resolved as shift
+  ! shift/reduce conflict for TT_while resolved as shift
+  ! shift/reduce conflict for TT_for resolved as shift
+    TT_elif         reduce using rule 13 (elif_clauses -> elif_clauses TT_elif expression TT_colon statement_list .)
+    TT_else         reduce using rule 13 (elif_clauses -> elif_clauses TT_elif expression TT_colon statement_list .)
+    $end            reduce using rule 13 (elif_clauses -> elif_clauses TT_elif expression TT_colon statement_list .)
+    TT_identifier   shift and go to state 9
+    TT_print        shift and go to state 10
+    TT_if           shift and go to state 11
+    TT_while        shift and go to state 12
+    TT_for          shift and go to state 13
+
+  ! TT_identifier   [ reduce using rule 13 (elif_clauses -> elif_clauses TT_elif expression TT_colon statement_list .) ]
+  ! TT_print        [ reduce using rule 13 (elif_clauses -> elif_clauses TT_elif expression TT_colon statement_list .) ]
+  ! TT_if           [ reduce using rule 13 (elif_clauses -> elif_clauses TT_elif expression TT_colon statement_list .) ]
+  ! TT_while        [ reduce using rule 13 (elif_clauses -> elif_clauses TT_elif expression TT_colon statement_list .) ]
+  ! TT_for          [ reduce using rule 13 (elif_clauses -> elif_clauses TT_elif expression TT_colon statement_list .) ]
+
+    statement                      shift and go to state 14
+    assignment                     shift and go to state 4
+    print_statement                shift and go to state 5
+    if_statement                   shift and go to state 6
+    while_loop                     shift and go to state 7
+    for_loop                       shift and go to state 8
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for TT_rparen in state 31 resolved as shift
+WARNING: shift/reduce conflict for TT_rparen in state 32 resolved as shift
+WARNING: shift/reduce conflict for TT_rparen in state 33 resolved as shift
+WARNING: shift/reduce conflict for TT_rparen in state 34 resolved as shift
+WARNING: shift/reduce conflict for TT_identifier in state 57 resolved as shift
+WARNING: shift/reduce conflict for TT_print in state 57 resolved as shift
+WARNING: shift/reduce conflict for TT_if in state 57 resolved as shift
+WARNING: shift/reduce conflict for TT_while in state 57 resolved as shift
+WARNING: shift/reduce conflict for TT_for in state 57 resolved as shift
+WARNING: shift/reduce conflict for TT_identifier in state 71 resolved as shift
+WARNING: shift/reduce conflict for TT_print in state 71 resolved as shift
+WARNING: shift/reduce conflict for TT_if in state 71 resolved as shift
+WARNING: shift/reduce conflict for TT_while in state 71 resolved as shift
+WARNING: shift/reduce conflict for TT_for in state 71 resolved as shift
+WARNING: shift/reduce conflict for TT_elif in state 73 resolved as shift
+WARNING: shift/reduce conflict for TT_else in state 73 resolved as shift
+WARNING: shift/reduce conflict for TT_identifier in state 82 resolved as shift
+WARNING: shift/reduce conflict for TT_print in state 82 resolved as shift
+WARNING: shift/reduce conflict for TT_if in state 82 resolved as shift
+WARNING: shift/reduce conflict for TT_while in state 82 resolved as shift
+WARNING: shift/reduce conflict for TT_for in state 82 resolved as shift
+WARNING: shift/reduce conflict for TT_identifier in state 86 resolved as shift
+WARNING: shift/reduce conflict for TT_print in state 86 resolved as shift
+WARNING: shift/reduce conflict for TT_if in state 86 resolved as shift
+WARNING: shift/reduce conflict for TT_while in state 86 resolved as shift
+WARNING: shift/reduce conflict for TT_for in state 86 resolved as shift
+WARNING: shift/reduce conflict for TT_identifier in state 87 resolved as shift
+WARNING: shift/reduce conflict for TT_print in state 87 resolved as shift
+WARNING: shift/reduce conflict for TT_if in state 87 resolved as shift
+WARNING: shift/reduce conflict for TT_while in state 87 resolved as shift
+WARNING: shift/reduce conflict for TT_for in state 87 resolved as shift
+WARNING: reduce/reduce conflict in state 28 resolved using rule (assignment -> TT_identifier TT_equ TT_float)
+WARNING: rejected rule (expression -> TT_float) in state 28
+WARNING: reduce/reduce conflict in state 29 resolved using rule (assignment -> TT_identifier TT_equ TT_int)
+WARNING: rejected rule (expression -> TT_int) in state 29

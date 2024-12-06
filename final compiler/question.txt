@@ -1,0 +1,25 @@
+# Define the number of students
+num_students = 90
+
+# Define the number of steps each student takes (example values)
+steps_per_student = [
+    1200, 1300, 1250, 1400, 1350, 1280, 1320, 1380, 1450, 1500,
+    1200, 1300, 1250, 1400, 1350, 1280, 1320, 1380, 1450, 1500,
+    1200, 1300, 1250, 1400, 1350, 1280, 1320, 1380, 1450, 1500,
+    1200, 1300, 1250, 1400, 1350, 1280, 1320, 1380, 1450, 1500,
+    1200, 1300, 1250, 1400, 1350, 1280, 1320, 1380, 1450, 1500,
+    1200, 1300, 1250, 1400, 1350, 1280, 1320, 1380, 1450, 1500,
+    1200, 1300, 1250, 1400, 1350, 1280, 1320, 1380, 1450, 1500,
+    1200, 1300, 1250, 1400, 1350, 1280, 1320, 1380, 1450, 1500,
+    1200, 1300, 1280, 1400, 1350, 1280, 1320, 1380, 1450, 1500
+]
+# Calculate the average number of steps
+sum = 0
+for steps in steps_per_student:
+	sum = sum + steps
+
+average_steps = sum / num_students
+
+# Print the result
+print("The average number of steps required for any student to complete the walk is ")
+print(average_steps)
